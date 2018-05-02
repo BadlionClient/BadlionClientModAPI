@@ -1,0 +1,16 @@
+.DS_Store
+.settings
+.project
+.classpath
+*.class
+bin/*
+lib/*
+include/*
+bin/
+.idea/
+*.iml
+out/*
+
+# maven
+target/
+dependency-reduced-pom.xml
