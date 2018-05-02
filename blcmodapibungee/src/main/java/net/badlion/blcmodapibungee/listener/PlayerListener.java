@@ -18,6 +18,7 @@ public class PlayerListener implements Listener {
 
 	@EventHandler
 	public void onLogin(PostLoginEvent event) {
+		// Send the disallowed mods to players when they login to the proxy. A notification will appear on the Badlion Client so they know the mod was disabled
 		ProxiedPlayer player = event.getPlayer();
 		player.unsafe().sendPacket(new PluginMessage("BLC|M", BlcModApiBungee.GSON_NON_PRETTY.toJson(this.plugin.getConf().getModsDisallowed()).getBytes(), false));
 	}
