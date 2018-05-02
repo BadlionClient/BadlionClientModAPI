@@ -10,7 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>blcmodapibungee</module>
-        <module>blcmodapispigot</module>
+        <module>blcmodapibukkit</module>
     </modules>
 
 

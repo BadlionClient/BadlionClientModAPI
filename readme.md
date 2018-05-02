@@ -1,6 +1,6 @@
 # Badlion Client Mod API
 
-This repository explains how to disable Badlion Client mods and mod features via Bungee/Spigot plugin.
+This repository explains how to disable Badlion Client mods and mod features via Bungee/Bukkit plugin.
 
 By default all mods on the Badlion Client are not restricted and a user can enable any of the mods at anytime. By using this plugin you remove the ability for a user to activate certain mods or features of mods while they are playing on your server. The user will gain control over the ability to use these mods/features again when they leave your server.
 
@@ -8,7 +8,7 @@ We have anticheat warnings for certain features already built into the client an
 
 ### Installation
 
-Compile either the Bungee or the Spigot example code and install on your server into the `plugins` directory. You then need to make a `config.json` and put it onto your server at `plugins/BadlionClientModAPI/config.json`. The first time you boot up the server with this either plugin installed it will automatically create the `plugins/BadlionClientModAPI` directory and a blank `config.json` file.
+Compile either the Bungee or the Bukkit example code and install on your server into the `plugins` directory. You then need to make a `config.json` and put it onto your server at `plugins/BadlionClientModAPI/config.json`. The first time you boot up the server with this either plugin installed it will automatically create the `plugins/BadlionClientModAPI` directory and a blank `config.json` file.
 
 Feel free to modify your `config.json` at anytime, but note that it will require a reboot with this example plugin to load the new changes.
 
