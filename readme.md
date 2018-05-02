@@ -8,9 +8,22 @@ We have anticheat warnings for certain features already built into the client an
 
 ### Installation
 
-Compile either the Bungee or the Bukkit example code and install on your server into the `plugins` directory. You then need to make a `config.json` and put it onto your server at `plugins/BadlionClientModAPI/config.json`. The first time you boot up the server with this either plugin installed it will automatically create the `plugins/BadlionClientModAPI` directory and a blank `config.json` file.
+How to install the Badlion Client Mod API on your server.
 
-Feel free to modify your `config.json` at anytime, but note that it will require a reboot with this example plugin to load the new changes.
+#### Quick Installation (for non-programmers)
+
+1. Download **either** the latest bukkit or bungee plugin from our releases (you don't need both, we recommend using the BungeeCord plugin if you are running BungeeCord): https://github.com/BadlionNetwork/BadlionClientModAPI/releases
+2. Place the downloaded plugin into your `plugins` directory on your server.
+3. Turn on the BungeeCord or Bukkit server and a default config will be automatically made in `plugins/BadlionClientModAPI/config.json`
+4. Edit the config as you see fit and reboot the server after you have finished editing the config (see below for more information).
+
+#### Do it yourself (for programmers)
+
+1. Clone this repository
+2. Compile the plugin(s) you want to use (you only need one per Minecraft network).
+2. Place the compiled plugins from the `target` directories into your `plugins` directory on your server.
+3. Turn on the BungeeCord or Bukkit server and a default config will be automatically made in `plugins/BadlionClientModAPI/config.json`
+4. Edit the config as you see fit and reboot the server after you have finished editing the config (see below for more information).
 
 ### Example Config
 
