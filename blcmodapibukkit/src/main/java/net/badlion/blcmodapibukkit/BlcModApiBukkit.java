@@ -23,6 +23,13 @@ public class BlcModApiBukkit extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        // Only support <= 1.12.2 at the moment, we will add 1.13 support when BLC 1.13 is ready
+        if (this.getServer().getBukkitVersion().startsWith("1.13")) {
+            this.getLogger().log(Level.SEVERE, "BLC Mod API is not currently compatible with 1.13 Minecraft. Check back later for updates.");
+            this.getPluginLoader().disablePlugin(this);
+            return;
+        }
+
         if (!this.getDataFolder().exists()) {
             if (!this.getDataFolder().mkdir()) {
                 this.getLogger().log(Level.SEVERE, "Failed to create plugin directory.");
