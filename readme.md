@@ -61,6 +61,7 @@ This example config will fully disable the waypoints and minimap mods. It will n
 + ArmorStatus
 + AutoGG
 + AutoText
++ AutoTip
 + Block Overlay
 + BossBar
 + Change Colors
@@ -70,6 +71,7 @@ This example config will fully disable the waypoints and minimap mods. It will n
 + Coordinates
 	+ biomeEnabled
 	+ directionEnabled
+	+ chunksEnabled
 	+ roundLocation
 	+ hideXYZ
 + CPS
@@ -100,14 +102,17 @@ This example config will fully disable the waypoints and minimap mods. It will n
 + Item Counter
 + ItemInfo
 + Keystrokes
++ LevelHead
 + MiniMap
 	+ directions
 + MotionBlur
 + Notifications
++ Particles
 + Perspective
 + Ping
 + PotionStatus
 + Protection
++ Reach Display
 + Saturation
 + Scoreboard
 	+ showNumbers
