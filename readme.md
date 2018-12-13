@@ -60,11 +60,18 @@ This example config will fully disable the waypoints and minimap mods. It will n
 + Animations
 + ArmorStatus
 + AutoGG
++ AutoText
 + Block Overlay
++ BossBar
++ ChangeColorMod
+    + renderElements
 + Chat
++ ClearWater
 + Coordinates
 	+ biomeEnabled
 	+ directionEnabled
+	+ roundLocation
+	+ hideXYZ
 + Crosshair
 	+ visibleHideGui
 	+ visibleDebugScreen
@@ -77,6 +84,7 @@ This example config will fully disable the waypoints and minimap mods. It will n
 	+ dynamicAttack
 	+ outline
 	+ dot
++ Direction
 + EnchantGlint
 + FOV Changer
 	+ dynamicSwiftness
@@ -88,23 +96,27 @@ This example config will fully disable the waypoints and minimap mods. It will n
 	+ playerHitboxesEnabled
 	+ projectileHitboxesEnabled
 + ItemCounter
-+ Keystroke
++ ItemInfo
++ Keystrokes
 + MiniMap
 	+ directions
++ MotionBlur
 + Notifications
++ Perspective
 + PotionStatus
 + Saturation
 + Scoreboard
 	+ showNumbers
 + ShowArrows
 + ShowCPS
-+ ShowFPS
-+ ShowPing
-+ ShowPotions
 + ShowDirection
 + ShowEnchantedGoldenApples
 + ShowFood
++ ShowFPS
 + ShowGoldenApples
++ ShowPing
++ ShowPotions
++ ShowSoup
 + TcpNoDelay
 + TimeChanger
 + ToggleSneak
