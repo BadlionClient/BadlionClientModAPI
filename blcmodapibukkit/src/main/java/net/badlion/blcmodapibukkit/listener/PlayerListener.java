@@ -135,7 +135,7 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
 
         // Create data we need for packet;
-        String channel = "BLC|M";
+        String channel = "badlion:mods";
         byte[] message = BlcModApiBukkit.GSON_NON_PRETTY.toJson(this.plugin.getConf().getModsDisallowed()).getBytes();
 
         try {
