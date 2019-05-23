@@ -58,54 +58,69 @@ This example config will fully disable the waypoints and minimap mods. It will n
 ### Mod Names and Fields that can be disabled
 
 + Animations
+    + itemHeld
+    + blockHit
+    + heartAnimation
+    + damageAnimation
+    + sneakingAnimation
+    + eatAnimation
+    + thrownItems
+    + bowAnimation
 + ArmorStatus
+    + showMaxDurability
+    + showPercentage
+    + inversedNumbers
+    + handPiece
 + AutoGG
 + AutoText
 + AutoTip
 + Block Overlay
 + BossBar
-+ Change Colors
-    + renderElements
 + Chat
+    + textBackgroundShadow
+    + timeStamp24h
+    + timeStampBold
+    + antiSpam
 + ClearWater
 + Coordinates
-	+ biomeEnabled
-	+ directionEnabled
-	+ chunksEnabled
-	+ roundLocation
-	+ hideXYZ
+    + biomeEnabled
+    + directionEnabled
+    + chunksEnabled
+    + roundLocation
+    + hideXYZ
 + CPS
 + Crosshair
-	+ visibleHideGui
-	+ visibleDebugScreen
-	+ visibleSpectatorMode
-	+ visibleThirdPerson
-	+ highlightPlayer
-	+ highlightHostile
-	+ highlightPassive
-	+ dynamicBow
-	+ dynamicAttack
-	+ outline
-	+ dot
+    + visibleHideGui
+    + visibleDebugScreen
+    + visibleSpectatorMode
+    + visibleThirdPerson
+    + highlightPlayer
+    + highlightHostile
+    + highlightPassive
+    + dynamicBow
+    + dynamicAttack
+    + outline
+    + dot
 + Direction
 + EnchantGlint
 + FOV Changer
-	+ dynamicSwiftness
+    + dynamicSwiftness
 + FPS
 + Fullbright
 + Hitboxes
-	+ animalHitBoxesEnabled
-	+ itemDropHitboxesEnabled
-	+ monsterHitboxesEnabled
-	+ playerHitboxesEnabled
-	+ projectileHitboxesEnabled
+    + animalHitBoxesEnabled
+    + itemDropHitboxesEnabled
+    + monsterHitboxesEnabled
+    + playerHitboxesEnabled
+    + projectileHitboxesEnabled
 + Item Counter
 + ItemInfo
++ ItemPhysic
 + Keystrokes
 + LevelHead
 + MiniMap
-	+ directions
 + MotionBlur
++ Music
 + Notifications
 + Particles
 + Perspective
@@ -115,7 +130,7 @@ This example config will fully disable the waypoints and minimap mods. It will n
 + Reach Display
 + Saturation
 + Scoreboard
-	+ showNumbers
+    + showNumbers
 + Shinypots
 + Show Food
 + Show Gapples
@@ -125,7 +140,8 @@ This example config will fully disable the waypoints and minimap mods. It will n
 + ShowPotions
 + TcpNoDelay
 + TimeChanger
++ Timers
 + ToggleSneak
-	+ flySpeed
-	+ inventorySneak
+    + flySpeed
+    + inventorySneak
 + Waypoints
