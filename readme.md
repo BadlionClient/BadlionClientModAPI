@@ -57,7 +57,7 @@ This example config will fully disable the waypoints and minimap mods. It will n
 
 #### Schematica printer mode
 
-By default, Schematica printer cannot be turned on servers.
+By default, Schematica printer cannot be enabled on servers.
 You need to specify that your server allows it using this API, like in this example :
 
 ```json
