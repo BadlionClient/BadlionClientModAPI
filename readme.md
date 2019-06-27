@@ -65,7 +65,7 @@ You need to specify that your server allows it using this API, like in this exam
 	"disabled": false,
 	"extra_data": {
 		"printerEnabled": {
-			"disabled": false
+			"forced": true
 		}
 	}
 }
