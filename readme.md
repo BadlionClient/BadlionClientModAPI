@@ -61,13 +61,17 @@ By default, Schematica printer cannot be turned on servers.
 You need to specify that your server allows it using this API, like in this example :
 
 ```json
-"Schematica": {
-	"disabled": false,
-	"extra_data": {
-		"printerEnabled": {
-			"forced": true
-		}
-	}
+{  
+   "modsDisallowed":{  
+      "Schematica":{  
+         "disabled":false,
+         "extra_data":{  
+            "printerEnabled":{  
+               "forced":true
+            }
+         }
+      }
+   }
 }
 ```
 
