@@ -139,7 +139,9 @@ You need to specify that your server allows it using this API, like in this exam
 + Keystrokes
 + LevelHead
 + MiniMap
++ MLG Cobweb
 + MotionBlur
++ MumbleLink
 + Music
 + Notifications
 + Particles
@@ -148,6 +150,7 @@ You need to specify that your server allows it using this API, like in this exam
 + PotionStatus
 + Protection
 + Reach Display
++ Replay
 + Saturation
 + Schematica
     + printerEnabled
@@ -161,6 +164,7 @@ You need to specify that your server allows it using this API, like in this exam
 + ShowArrows
 + ShowPotions
 + TcpNoDelay
++ TeamSpeak
 + TimeChanger
 + Timers
 + ToggleSneak
