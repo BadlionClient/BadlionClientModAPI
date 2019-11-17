@@ -8,8 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Path;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -48,7 +48,7 @@ public class BlcModApiVelocity {
         
         if (!dataFolder.exists()) {
             if (!dataFolder.mkdir()) {
-                this.logger.log(Level.SEVERE, "Failed to create plugin directory.");
+                this.logger.error("Failed to create plugin directory.");
             }
         }
         
@@ -60,9 +60,9 @@ public class BlcModApiVelocity {
             // Only register the listener if the config loads successfully
             this.proxy.getEventManager().register(this, new PlayerListener(this));
 
-            this.logger.log(Level.INFO, "Successfully setup BadlionClientModAPI plugin.");
+            this.logger.info("Successfully setup BadlionClientModAPI plugin.");
         } catch (Exception e) {
-            this.logger.log(Level.SEVERE, "Error with config for BadlionClientModAPI plugin.");
+            this.logger.error("Error with config for BadlionClientModAPI plugin.");
             e.printStackTrace();
         }
     }
@@ -71,7 +71,7 @@ public class BlcModApiVelocity {
 		try (Reader reader = new BufferedReader(new FileReader(file))) {
 			return BlcModApiVelocity.GSON_NON_PRETTY.fromJson(reader, Conf.class);
 		} catch (FileNotFoundException ex) {
-			this.logger.log(Level.INFO,"No Config Found: Saving default...");
+			this.logger.info("No Config Found: Saving default...");
 			Conf conf = new Conf();
 			this.saveConf(conf, new File(this.dataFolderPath.toFile(), "config.json"));
 			return conf;
