@@ -1,6 +1,6 @@
 # Badlion Client Mod API
 
-This repository explains how to disable Badlion Client mods and mod features via Bungee/Bukkit plugin.
+This repository explains how to disable Badlion Client mods and mod features via Velocity/Bungee/Bukkit plugin.
 
 By default all mods on the Badlion Client are not restricted and a user can enable any of the mods at anytime. By using this plugin you remove the ability for a user to activate certain mods or features of mods while they are playing on your server. The user will gain control over the ability to use these mods/features again when they leave your server.
 
@@ -12,7 +12,7 @@ How to install the Badlion Client Mod API on your server.
 
 #### Quick Installation (for non-programmers)
 
-1. Download **either** the latest bukkit or bungee plugin from our releases (you don't need both, we recommend using the BungeeCord plugin if you are running BungeeCord): https://github.com/BadlionNetwork/BadlionClientModAPI/releases
+1. Download **either** the latest bukkit, bungee or velocity plugin from our releases (you don't need both, we recommend using the BungeeCord or Velocity plugin if you are running BungeeCord or Velocity): https://github.com/BadlionNetwork/BadlionClientModAPI/releases
 2. Place the downloaded plugin into your `plugins` directory on your server.
 3. Turn on the BungeeCord or Bukkit server and a default config will be automatically made in `plugins/BadlionClientModAPI/config.json`
 4. Edit the config as you see fit and reboot the server after you have finished editing the config (see below for more information).
