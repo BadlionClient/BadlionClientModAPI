@@ -26,10 +26,10 @@ import net.badlion.blcmodapivelocity.listener.PlayerListener;
 @Plugin(id = "blcmodapivelocity", name = "BadlionClientModAPI", version = "1.0", authors = {"Badlion"})
 public class BlcModApiVelocity {
 
-	public static final Gson GSON_NON_PRETTY = new GsonBuilder().enableComplexMapKeySerialization().disableHtmlEscaping().create();
-	public static final Gson GSON_PRETTY = new GsonBuilder().enableComplexMapKeySerialization().disableHtmlEscaping().setPrettyPrinting().create();
+    public static final Gson GSON_NON_PRETTY = new GsonBuilder().enableComplexMapKeySerialization().disableHtmlEscaping().create();
+    public static final Gson GSON_PRETTY = new GsonBuilder().enableComplexMapKeySerialization().disableHtmlEscaping().setPrettyPrinting().create();
 
-	private final ProxyServer proxy;
+    private final ProxyServer proxy;
     private final Logger logger;
     private final Path dataFolderPath;
     private Conf conf;
@@ -67,30 +67,30 @@ public class BlcModApiVelocity {
         }
     }
 
-	public Conf loadConf(File file) throws IOException {
-		try (Reader reader = new BufferedReader(new FileReader(file))) {
-			return BlcModApiVelocity.GSON_NON_PRETTY.fromJson(reader, Conf.class);
-		} catch (FileNotFoundException ex) {
-			this.logger.info("No Config Found: Saving default...");
-			Conf conf = new Conf();
-			this.saveConf(conf, new File(this.dataFolderPath.toFile(), "config.json"));
-			return conf;
-		}
-	}
+    public Conf loadConf(File file) throws IOException {
+        try (Reader reader = new BufferedReader(new FileReader(file))) {
+            return BlcModApiVelocity.GSON_NON_PRETTY.fromJson(reader, Conf.class);
+        } catch (FileNotFoundException ex) {
+            this.logger.info("No Config Found: Saving default...");
+            Conf conf = new Conf();
+            this.saveConf(conf, new File(this.dataFolderPath.toFile(), "config.json"));
+            return conf;
+        }
+    }
 
-	private void saveConf(Conf conf, File file) {
-		try (FileWriter writer = new FileWriter(file)) {
-			BlcModApiVelocity.GSON_PRETTY.toJson(conf, writer);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
+    private void saveConf(Conf conf, File file) {
+        try (FileWriter writer = new FileWriter(file)) {
+            BlcModApiVelocity.GSON_PRETTY.toJson(conf, writer);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
-	public Conf getConf() {
-		return this.conf;
-	}
+    public Conf getConf() {
+        return this.conf;
+    }
 
-	public MinecraftChannelIdentifier getBlcModsChannel() {
+    public MinecraftChannelIdentifier getBlcModsChannel() {
         return this.blcModsChannel;
     }
 }
