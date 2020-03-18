@@ -91,6 +91,10 @@ You need to specify that your server allows it using this API, like in this exam
     + showPercentage
     + inversedNumbers
     + handPiece
+    + bootPiece
+    + leggingPiece
+    + chestPiece
+    + helmetPiece
 + AutoGG
 + AutoText
 + AutoTip
@@ -101,14 +105,27 @@ You need to specify that your server allows it using this API, like in this exam
     + timeStamp24h
     + timeStampBold
     + antiSpam
+    + infiniteHistory
 + ClearWater
++ Clock
++ Combo Counter
 + Coordinates
     + biomeEnabled
     + directionEnabled
     + chunksEnabled
     + roundLocation
     + hideXYZ
+    + textModCustomPrefix
+    + textModOneLine
+    + textModShowXZ
+    + textModShowY
+    + textModShowDirection
+    + textModShowBiome
+    + textModShowPrefix
+    + textModShowChunks
 + CPS
+    + reversed
+    + textModShowPrefix
 + Crosshair
     + visibleHideGui
     + visibleDebugScreen
@@ -121,29 +138,41 @@ You need to specify that your server allows it using this API, like in this exam
     + dynamicAttack
     + outline
     + dot
+    + vanillaBlendering
 + Direction
 + EnchantGlint
 + FOV Changer
     + dynamicSwiftness
+    + flyingB
+    + slownessB
+    + sprintingB
+    + swiftnessB
+    + defaultB
 + FPS
+    + reversed
 + Fullbright
++ Hit Color
 + Hitboxes
     + animalHitBoxesEnabled
     + itemDropHitboxesEnabled
     + monsterHitboxesEnabled
     + playerHitboxesEnabled
     + projectileHitboxesEnabled
+    + itemFrameHitboxesEnabled
 + Item Counter
 + ItemInfo
 + ItemPhysic
 + Keystrokes
 + LevelHead
++ Memory
 + MiniMap
 + MLG Cobweb
 + MotionBlur
 + MumbleLink
 + Music
++ NickHider
 + Notifications
++ Pack Display
 + Particles
 + Perspective
 + Ping
@@ -156,18 +185,17 @@ You need to specify that your server allows it using this API, like in this exam
     + printerEnabled
 + Scoreboard
     + showNumbers
++ Server Address
 + Shinypots
-+ Show Food
-+ Show Gapples
-+ Show God Apples
-+ Show Soup
-+ ShowArrows
-+ ShowPotions
++ SkyblockAddons
++ Stopwatch
 + TcpNoDelay
 + TeamSpeak
 + TimeChanger
 + Timers
 + ToggleSneak
-    + flySpeed
     + inventorySneak
++ ToggleSprint
+    + flySpeed
 + Waypoints
++ Zoom
