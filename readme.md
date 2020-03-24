@@ -29,7 +29,7 @@ How to install the Badlion Client Mod API on your server.
 
 To make a config place the information below example into `plugins/BadlionClientModAPI/config.json`. If you have any JSON errors it will not load the plugin properly. A quick and easy way to test that your JSON config is valid is to use this tool: https://jsonformatter.curiousconcept.com/
 
-This example config will fully disable the waypoints and minimap mods. It will not disable togglesneak mod, but it will block the player from using the inventorySneak and flySpeed features of the togglesneak mod.
+This example config will fully disable the waypoints and minimap mods. It will not disable togglesneak mod, but it will block the player from using the inventorySneak and flySpeed features of the togglesneak and togglesprint mods.
 
 ```json
 {
@@ -45,12 +45,17 @@ This example config will fully disable the waypoints and minimap mods. It will n
 			"extra_data": {
 				"inventorySneak": {
 					"disabled": true
-				},
-				"flySpeed": {
-					"disabled": true
 				}
 			}
-		}
+		},
+        "ToggleSprint": {
+            "disabled": false,
+            "extra_data": {
+                "flySpeed": {
+                    "disabled": true
+                }
+            }
+        }
 	}
 }
 ```
