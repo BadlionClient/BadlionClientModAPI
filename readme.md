@@ -33,21 +33,21 @@ This example config will fully disable the waypoints and minimap mods. It will n
 
 ```json
 {
-	"modsDisallowed": {
-		"Waypoints": {
-			"disabled": true
-		},
-		"MiniMap": {
-			"disabled": true
-		},
-		"ToggleSneak": {
-			"disabled": false,
-			"extra_data": {
-				"inventorySneak": {
-					"disabled": true
-				}
-			}
-		},
+    "modsDisallowed": {
+        "Waypoints": {
+            "disabled": true
+        },
+        "MiniMap": {
+            "disabled": true
+        },
+        "ToggleSneak": {
+            "disabled": false,
+            "extra_data": {
+                "inventorySneak": {
+                    "disabled": true
+                }
+            }
+        },
         "ToggleSprint": {
             "disabled": false,
             "extra_data": {
@@ -56,7 +56,7 @@ This example config will fully disable the waypoints and minimap mods. It will n
                 }
             }
         }
-	}
+    }
 }
 ```
 
@@ -67,16 +67,16 @@ You need to specify that your server allows it using this API, like in this exam
 
 ```json
 {  
-   "modsDisallowed": {  
-      "Schematica": {  
-         "disabled": false,
-         "extra_data": {  
-            "printerEnabled": {  
-               "forced": true
+    "modsDisallowed": {  
+        "Schematica": {  
+            "disabled": false,
+            "extra_data": {  
+                "printerEnabled": {  
+                    "forced": true
+                }
             }
-         }
-      }
-   }
+        }
+    }
 }
 ```
 
