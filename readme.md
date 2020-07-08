@@ -84,22 +84,27 @@ You need to specify that your server allows it using this API, like in this exam
 
 + Animations
     + itemHeld
+    + itemSwitch
+    + hitBox
+    + inventory
     + blockHit
     + heartAnimation
     + damageAnimation
     + sneakingAnimation
     + eatAnimation
     + thrownItems
+    + fishingRod
+    + swordSwing
     + bowAnimation
 + ArmorStatus
     + showMaxDurability
     + showPercentage
-    + inversedNumbers
     + handPiece
     + bootPiece
     + leggingPiece
     + chestPiece
     + helmetPiece
++ AutoFriend
 + AutoGG
 + AutoText
 + AutoTip
@@ -111,6 +116,13 @@ You need to specify that your server allows it using this API, like in this exam
     + timeStampBold
     + antiSpam
     + infiniteHistory
+    + emphasizeUsername
+    + boldEffect
+    + underlineEffect
+    + italicsEffect
+    + soundEffect
++ Chunk Borders
++ Clear Glass
 + ClearWater
 + Clock
 + Combo Counter
@@ -126,7 +138,6 @@ You need to specify that your server allows it using this API, like in this exam
     + textModShowY
     + textModShowDirection
     + textModShowBiome
-    + textModShowPrefix
     + textModShowChunks
 + CPS
     + reversed
@@ -147,12 +158,6 @@ You need to specify that your server allows it using this API, like in this exam
 + Direction
 + EnchantGlint
 + FOV Changer
-    + dynamicSwiftness
-    + flyingB
-    + slownessB
-    + sprintingB
-    + swiftnessB
-    + defaultB
 + FPS
     + reversed
 + Fullbright
@@ -164,9 +169,17 @@ You need to specify that your server allows it using this API, like in this exam
     + playerHitboxesEnabled
     + projectileHitboxesEnabled
     + itemFrameHitboxesEnabled
+    + hideStuckArrows
+    + fireballHitboxesEnabled
+    + witherskullHitboxesEnabled
+    + arrowHitboxesEnabled
+    + fireworkrocketHitboxesEnabled
+    + snowballHitboxesEnabled
+    + xporbHitboxesEnabled
++ InventoryBlur
 + Item Counter
 + ItemInfo
-+ ItemPhysic
++ Item Physics
 + Keystrokes
 + LevelHead
 + Memory
@@ -175,12 +188,14 @@ You need to specify that your server allows it using this API, like in this exam
 + MotionBlur
 + MumbleLink
 + Music
++ Name History
 + NickHider
 + Notifications
 + Pack Display
 + Particles
 + Perspective
 + Ping
++ Player Counter
 + PotionStatus
 + Protection
 + Reach Display
@@ -190,6 +205,7 @@ You need to specify that your server allows it using this API, like in this exam
     + printerEnabled
 + Scoreboard
     + showNumbers
+    + removeNumberOffset
 + Server Address
 + Shinypots
 + SkyblockAddons
