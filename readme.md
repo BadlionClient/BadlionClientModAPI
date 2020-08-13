@@ -127,10 +127,10 @@ You need to specify that your server allows it using this API, like in this exam
 + Clock
 + Combo Counter
 + Coordinates
+    + roundLocation
     + biomeEnabled
     + directionEnabled
     + chunksEnabled
-    + roundLocation
     + hideXYZ
     + textModCustomPrefix
     + textModOneLine
@@ -141,6 +141,7 @@ You need to specify that your server allows it using this API, like in this exam
     + textModShowChunks
 + CPS
     + reversed
+    + showDecimal
     + textModShowPrefix
 + Crosshair
     + visibleHideGui
@@ -178,8 +179,8 @@ You need to specify that your server allows it using this API, like in this exam
     + xporbHitboxesEnabled
 + InventoryBlur
 + Item Counter
-+ ItemInfo
 + Item Physics
++ ItemInfo
 + Keystrokes
 + LevelHead
 + Memory
@@ -214,6 +215,7 @@ You need to specify that your server allows it using this API, like in this exam
 + TeamSpeak
 + TimeChanger
 + Timers
++ ToggleChat
 + ToggleSneak
     + inventorySneak
 + ToggleSprint
