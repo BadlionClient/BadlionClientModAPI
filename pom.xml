@@ -7,7 +7,7 @@
     <groupId>net.badlion</groupId>
     <artifactId>badlionclientmodapi</artifactId>
     <packaging>pom</packaging>
-    <version>1.2.0</version>
+    <version>1.2.2</version>
     <modules>
         <module>blcmodapibungee</module>
         <module>blcmodapibukkit</module>
