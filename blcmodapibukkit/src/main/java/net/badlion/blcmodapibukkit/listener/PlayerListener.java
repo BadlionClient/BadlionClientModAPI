@@ -30,6 +30,8 @@ public class PlayerListener implements Listener {
 
     private Class<?> packetPlayOutCustomPayloadClass;
     private Constructor<?> packetPlayOutCustomPayloadConstructor;
+    private Constructor<?> packetPlayOutMinecraftKeyConstructor;
+    private boolean useMinecraftKey;
 
     // Bukkit 1.8+ support
     private Class<?> packetDataSerializerClass;
@@ -110,7 +112,17 @@ public class PlayerListener implements Listener {
             // If we made it this far in theory we are on at least 1.8
             this.packetPlayOutCustomPayloadConstructor = this.getConstructor(this.packetPlayOutCustomPayloadClass, String.class, this.packetDataSerializerClass);
             if (this.packetPlayOutCustomPayloadConstructor == null) {
-                throw new RuntimeException("Failed to find PacketPlayOutCustomPayload constructor 2x");
+                Class<?> minecraftKeyClass = this.getClass("net.minecraft.server." + this.versionSuffix + ".MinecraftKey");
+
+                // Fix for Paper in newer versions
+                this.packetPlayOutCustomPayloadConstructor = this.getConstructor(this.packetPlayOutCustomPayloadClass, minecraftKeyClass, this.packetDataSerializerClass);
+
+                if (this.packetPlayOutCustomPayloadConstructor == null) {
+                    throw new RuntimeException("Failed to find PacketPlayOutCustomPayload constructor 2x");
+                } else {
+                    this.useMinecraftKey = true;
+                    this.packetPlayOutMinecraftKeyConstructor = this.getConstructor(minecraftKeyClass, String.class);
+                }
             }
         }
 
@@ -140,13 +152,17 @@ public class PlayerListener implements Listener {
 
         try {
             Object packet;
-
             // Newer MC version, setup ByteBuf object
             if (this.packetDataSerializerClass != null) {
                 Object byteBuf = this.wrappedBufferMethod.invoke(null, message);
                 Object packetDataSerializer = this.packetDataSerializerConstructor.newInstance(byteBuf);
 
-                packet = this.packetPlayOutCustomPayloadConstructor.newInstance(channel, packetDataSerializer);
+                if (this.useMinecraftKey) {
+                    Object key = this.packetPlayOutMinecraftKeyConstructor.newInstance(channel);
+                    packet = this.packetPlayOutCustomPayloadConstructor.newInstance(key, packetDataSerializer);
+                } else {
+                    packet = this.packetPlayOutCustomPayloadConstructor.newInstance(channel, packetDataSerializer);
+                }
             } else {
                 // Work our magic to make the packet
                 packet = this.packetPlayOutCustomPayloadConstructor.newInstance(channel, message);
