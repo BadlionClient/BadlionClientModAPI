@@ -80,6 +80,27 @@ You need to specify that your server allows it using this API, like in this exam
 }
 ```
 
+#### AutoText command whitelist
+
+Instead of disabling the AutoText mod, you can specify a list of commands that you want to allow.
+Below is an example which allows the use of a few commands:
+
+```json
+{  
+    "modsDisallowed": {  
+        "AutoText": {  
+            "disabled": false,
+            "settings": {  
+                "whitelistedCommands": [
+                    "/warp",
+                    "/help"
+                ]
+            }
+        }
+    }
+}
+```
+
 ### Mod Names and Fields that can be disabled
 
 + Animations
@@ -96,6 +117,7 @@ You need to specify that your server allows it using this API, like in this exam
     + fishingRod
     + swordSwing
     + bowAnimation
+    + alwaysSwing
 + ArmorStatus
     + showMaxDurability
     + showPercentage
@@ -104,11 +126,13 @@ You need to specify that your server allows it using this API, like in this exam
     + leggingPiece
     + chestPiece
     + helmetPiece
+    + offHandPiece
 + AutoFriend
 + AutoGG
 + AutoText
 + AutoTip
 + Block Overlay
++ BlockInfo
 + BossBar
 + Chat
     + textBackgroundShadow
@@ -142,7 +166,6 @@ You need to specify that your server allows it using this API, like in this exam
 + CPS
     + reversed
     + showDecimal
-    + textModShowPrefix
 + Crosshair
     + visibleHideGui
     + visibleDebugScreen
@@ -156,6 +179,7 @@ You need to specify that your server allows it using this API, like in this exam
     + outline
     + dot
     + vanillaBlendering
++ Custom Fonts
 + Direction
 + EnchantGlint
 + FOV Changer
@@ -179,10 +203,13 @@ You need to specify that your server allows it using this API, like in this exam
     + xporbHitboxesEnabled
 + InventoryBlur
 + Item Counter
++ Item Info
 + Item Physics
-+ ItemInfo
++ Item Tracker
++ JustEnoughItems
 + Keystrokes
 + LevelHead
++ Light Overlay
 + Memory
 + MiniMap
 + MLG Cobweb
@@ -191,6 +218,7 @@ You need to specify that your server allows it using this API, like in this exam
 + Music
 + Name History
 + NickHider
++ NotEnoughUpdates
 + Notifications
 + Pack Display
 + Particles
@@ -199,6 +227,7 @@ You need to specify that your server allows it using this API, like in this exam
 + Player Counter
 + PotionStatus
 + Protection
++ Quickplay
 + Reach Display
 + Replay
 + Saturation
@@ -221,4 +250,6 @@ You need to specify that your server allows it using this API, like in this exam
 + ToggleSprint
     + flySpeed
 + Waypoints
++ WeatherChanger
++ World Edit CUI
 + Zoom
