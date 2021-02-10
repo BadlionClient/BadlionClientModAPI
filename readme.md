@@ -221,6 +221,7 @@ Below is an example which allows the use of a few commands:
 + NotEnoughUpdates
 + Notifications
 + Pack Display
++ Pack Tweaks
 + Particles
 + Perspective
 + Ping
