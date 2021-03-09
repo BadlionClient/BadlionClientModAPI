@@ -6,6 +6,7 @@ import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.proxy.ProxyServer;
+import net.badlion.blcmodapivelocity.listener.PlayerLoginListener;
 
 import javax.inject.Inject;
 import java.io.*;
@@ -52,7 +53,7 @@ public class BlcModApiVelocity {
 	}
 
 	@Subscribe
-	public void onInitializ(ProxyInitializeEvent event) {
+	public void onInitialize(ProxyInitializeEvent event) {
 		this.onEnable();//Just kept all that from the original Bungee version, just tweaked a few things.
 	}
 
@@ -77,9 +78,5 @@ public class BlcModApiVelocity {
 
 	public Conf getConf() {
 		return this.conf;
-	}
-
-	public ProxyServer getServer() {
-		return server;
 	}
 }

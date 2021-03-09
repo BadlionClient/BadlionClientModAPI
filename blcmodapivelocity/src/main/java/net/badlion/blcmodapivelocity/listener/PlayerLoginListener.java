@@ -1,10 +1,11 @@
-package net.badlion.blcmodapivelocity;
+package net.badlion.blcmodapivelocity.listener;
 
 import com.velocitypowered.api.event.PostOrder;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.connection.LoginEvent;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.messages.MinecraftChannelIdentifier;
+import net.badlion.blcmodapivelocity.BlcModApiVelocity;
 
 public class PlayerLoginListener {
 
