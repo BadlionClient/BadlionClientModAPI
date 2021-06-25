@@ -118,6 +118,7 @@ Below is an example which allows the use of a few commands:
     + swordSwing
     + bowAnimation
     + alwaysSwing
++ AntiXray
 + ArmorStatus
     + showMaxDurability
     + showPercentage
@@ -149,6 +150,7 @@ Below is an example which allows the use of a few commands:
 + Clear Glass
 + ClearWater
 + Clock
++ ColorSaturation
 + Combo Counter
 + Coordinates
     + roundLocation
@@ -156,6 +158,8 @@ Below is an example which allows the use of a few commands:
     + directionEnabled
     + chunksEnabled
     + hideXYZ
+    + hideC
+    + hideBiome
     + textModCustomPrefix
     + textModOneLine
     + textModShowXZ
@@ -163,6 +167,7 @@ Below is an example which allows the use of a few commands:
     + textModShowDirection
     + textModShowBiome
     + textModShowChunks
+    + biomeColors
 + CPS
     + reversed
     + showDecimal
@@ -215,7 +220,6 @@ Below is an example which allows the use of a few commands:
 + MLG Cobweb
 + MotionBlur
 + MumbleLink
-+ Music
 + Name History
 + NickHider
 + NotEnoughUpdates
@@ -238,6 +242,7 @@ Below is an example which allows the use of a few commands:
     + showNumbers
     + removeNumberOffset
 + Server Address
+    + showIcon
 + Shinypots
 + SkyblockAddons
 + Stopwatch
@@ -245,12 +250,15 @@ Below is an example which allows the use of a few commands:
 + TeamSpeak
 + TimeChanger
 + Timers
++ TNT Time
 + ToggleChat
 + ToggleSneak
     + inventorySneak
 + ToggleSprint
     + flySpeed
++ Uptime
 + Waypoints
 + WeatherChanger
 + World Edit CUI
 + Zoom
+    + useOptifineZoom
