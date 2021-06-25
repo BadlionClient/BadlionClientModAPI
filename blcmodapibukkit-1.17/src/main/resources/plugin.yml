@@ -1,0 +1,5 @@
+name: BadlionClientModAPI
+main: net.badlion.blcmodapibukkit.BlcModApiBukkit
+version: 1.0
+author: Badlion
+api-version: 1.17

@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import net.badlion.blcmodapibukkit.listener.PlayerListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -31,7 +30,7 @@ public class BlcModApiBukkit extends JavaPlugin {
         }
 
         try {
-            this.conf = loadConf(new File(this.getDataFolder(), "config.json"));
+            this.conf = this.loadConf(new File(this.getDataFolder(), "config.json"));
 
             // Register channel
             this.getServer().getMessenger().registerOutgoingPluginChannel(this, "badlion:mods");
@@ -52,9 +51,9 @@ public class BlcModApiBukkit extends JavaPlugin {
     }
 
     public Conf loadConf(File file) throws IOException {
-        try {
-            Reader reader = new BufferedReader(new FileReader(file));
+        try (Reader reader = new FileReader(file)) {
             return BlcModApiBukkit.GSON_NON_PRETTY.fromJson(reader, Conf.class);
+
         } catch (FileNotFoundException ex) {
             this.getLogger().log(Level.INFO,"No Config Found: Saving default...");
             Conf conf = new Conf();
@@ -64,9 +63,9 @@ public class BlcModApiBukkit extends JavaPlugin {
     }
 
     private void saveConf(Conf conf, File file) {
-        try {
-            FileWriter writer = new FileWriter(file);
+        try (FileWriter writer = new FileWriter(file)) {
             BlcModApiBukkit.GSON_PRETTY.toJson(conf, writer);
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
