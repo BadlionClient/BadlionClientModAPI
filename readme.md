@@ -132,6 +132,7 @@ Below is an example which allows the use of a few commands:
 + AutoGG
 + AutoText
 + AutoTip
++ Bedwars Beds
 + Block Overlay
 + BlockInfo
 + BossBar
