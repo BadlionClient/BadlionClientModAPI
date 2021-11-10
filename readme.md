@@ -118,6 +118,8 @@ Below is an example which allows the use of a few commands:
     + swordSwing
     + bowAnimation
     + alwaysSwing
+    + removeTitles
+    + oldEnchantGlint
 + AntiXray
 + ArmorStatus
     + showMaxDurability
@@ -133,6 +135,7 @@ Below is an example which allows the use of a few commands:
 + AutoText
 + AutoTip
 + Bedwars Beds
++ Block Counter
 + Block Overlay
 + BlockInfo
 + BossBar
@@ -147,6 +150,7 @@ Below is an example which allows the use of a few commands:
     + underlineEffect
     + italicsEffect
     + soundEffect
+    + smoothChat
 + Chunk Borders
 + Clear Glass
 + ClearWater
@@ -172,6 +176,7 @@ Below is an example which allows the use of a few commands:
 + CPS
     + reversed
     + showDecimal
+    + removeCpsText
 + Crosshair
     + visibleHideGui
     + visibleDebugScreen
@@ -183,6 +188,7 @@ Below is an example which allows the use of a few commands:
     + dynamicBow
     + dynamicAttack
     + outline
+    + dotOutline
     + dot
     + vanillaBlendering
 + Custom Fonts
@@ -207,6 +213,7 @@ Below is an example which allows the use of a few commands:
     + fireworkrocketHitboxesEnabled
     + snowballHitboxesEnabled
     + xporbHitboxesEnabled
+    + player1_7HitboxesEnabled
 + InventoryBlur
 + Item Counter
 + Item Info
@@ -221,10 +228,13 @@ Below is an example which allows the use of a few commands:
 + MLG Cobweb
 + MotionBlur
 + MumbleLink
++ Music
 + Name History
++ Name Tags
 + NickHider
 + NotEnoughUpdates
 + Notifications
++ OofMod
 + Pack Display
 + Pack Tweaks
 + Particles
@@ -245,8 +255,9 @@ Below is an example which allows the use of a few commands:
 + Server Address
     + showIcon
 + Shinypots
-+ SkyblockAddons
++ Skyblock
 + Stopwatch
++ Tab
 + TcpNoDelay
 + TeamSpeak
 + TimeChanger
