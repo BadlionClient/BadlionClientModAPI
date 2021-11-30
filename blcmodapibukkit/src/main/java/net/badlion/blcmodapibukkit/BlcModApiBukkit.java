@@ -1,78 +1,91 @@
 package net.badlion.blcmodapibukkit;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import net.badlion.blcmodapibukkit.listener.PlayerListener;
+import net.badlion.blcmodapibukkit.timers.TimerApi;
+import net.badlion.blcmodapibukkit.timers.TimerApiImpl;
+import net.badlion.blcmodapibukkit.waypoints.WaypointManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.logging.Level;
 
 public class BlcModApiBukkit extends JavaPlugin {
+	private final BukkitBadlionApi badlionApi;
+	private final BukkitPluginMessageSender messageSender;
+	private final TimerApiImpl timerApi;
+	private final WaypointManager waypointManager;
 
-    public static final Gson GSON_NON_PRETTY = new GsonBuilder().enableComplexMapKeySerialization().disableHtmlEscaping().create();
-    public static final Gson GSON_PRETTY = new GsonBuilder().enableComplexMapKeySerialization().disableHtmlEscaping().setPrettyPrinting().create();
+	public BlcModApiBukkit() {
+		this.badlionApi = new BukkitBadlionApi(this);
+		this.messageSender = new BukkitPluginMessageSender(this);
+		this.timerApi = new TimerApiImpl(this);
+		this.waypointManager = new WaypointManager(this);
+		this.badlionApi.setWaypointManager(this.waypointManager);
+	}
 
-    private Conf conf;
+	@Override
+	public void onEnable() {
+		if (!this.getDataFolder().exists()) {
+			if (!this.getDataFolder().mkdir()) {
+				this.getLogger().log(Level.SEVERE, "Failed to create plugin directory.");
+			}
+		}
 
-    @Override
-    public void onEnable() {
+		try {
+			this.badlionApi.loadConfig(new File(this.getDataFolder(), "config.json"));
 
-        if (!this.getDataFolder().exists()) {
-            if (!this.getDataFolder().mkdir()) {
-                this.getLogger().log(Level.SEVERE, "Failed to create plugin directory.");
-            }
-        }
+			this.waypointManager.loadWaypoints();
 
-        try {
-            this.conf = this.loadConf(new File(this.getDataFolder(), "config.json"));
+			// Register channel
+			this.getServer().getMessenger().registerOutgoingPluginChannel(this, "badlion:mods");
+			this.getServer().getMessenger().registerOutgoingPluginChannel(this, "badlion:modapi");
+			this.getServer().getMessenger().registerOutgoingPluginChannel(this, TimerApi.CHANNEL_NAME);
 
-            // Register channel
-            this.getServer().getMessenger().registerOutgoingPluginChannel(this, "badlion:mods");
+			// Only register the listener if the config loads successfully
+			this.getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
+			this.getServer().getPluginManager().registerEvents(this.waypointManager, this);
 
-            // Only register the listener if the config loads successfully
-            this.getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
+			this.getServer().getScheduler().runTaskTimer(this, new Runnable() {
+				@Override
+				public void run() {
+					BlcModApiBukkit.this.getTimerApi().tickTimers();
+				}
+			}, 1L, 1L);
 
-            this.getLogger().log(Level.INFO, "Successfully setup BadlionClientModAPI plugin.");
-        } catch (IOException e) {
-            this.getLogger().log(Level.SEVERE, "Error with config for BadlionClientModAPI plugin.");
-            e.printStackTrace();
-        }
-    }
+			this.getServer().getScheduler().runTaskTimer(this, new Runnable() {
+				@Override
+				public void run() {
+					BlcModApiBukkit.this.getTimerApi().syncTimers();
+				}
+			}, 60L, 60L);
 
-    @Override
-    public void onDisable() {
+			this.getLogger().log(Level.INFO, "Successfully setup BadlionClientModAPI plugin.");
 
-    }
+		} catch (IOException e) {
+			this.getLogger().log(Level.SEVERE, "Error with config for BadlionClientModAPI plugin.");
+			e.printStackTrace();
+		}
+	}
 
-    public Conf loadConf(File file) throws IOException {
-        try (Reader reader = new FileReader(file)) {
-            return BlcModApiBukkit.GSON_NON_PRETTY.fromJson(reader, Conf.class);
+	@Override
+	public void onDisable() {
+		this.badlionApi.saveConfig(this.badlionApi.getBadlionConfig(), new File(this.getDataFolder(), "config.json"));
+	}
 
-        } catch (FileNotFoundException ex) {
-            this.getLogger().log(Level.INFO,"No Config Found: Saving default...");
-            Conf conf = new Conf();
-            this.saveConf(conf, new File(this.getDataFolder(), "config.json"));
-            return conf;
-        }
-    }
+	public BukkitBadlionApi getBadlionApi() {
+		return this.badlionApi;
+	}
 
-    private void saveConf(Conf conf, File file) {
-        try (FileWriter writer = new FileWriter(file)) {
-            BlcModApiBukkit.GSON_PRETTY.toJson(conf, writer);
+	public BukkitPluginMessageSender getMessageSender() {
+		return this.messageSender;
+	}
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
+	public TimerApiImpl getTimerApi() {
+		return this.timerApi;
+	}
 
-    public Conf getConf() {
-        return this.conf;
-    }
-
+	public WaypointManager getWaypointManager() {
+		return this.waypointManager;
+	}
 }

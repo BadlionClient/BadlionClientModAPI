@@ -1,24 +1,23 @@
 package net.badlion.blcmodapibungee;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import net.badlion.blcmodapibungee.listener.PlayerListener;
+import net.badlion.blcmodapibungee.waypoints.UnsupportedWaypointManager;
 import net.md_5.bungee.api.plugin.Plugin;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.logging.Level;
 
 public class BlcModApiBungee extends Plugin {
+	private final BungeeBadlionApi badlionApi;
+	private final BungeePluginMessageSender messageSender;
 
-	public static final Gson GSON_NON_PRETTY = new GsonBuilder().enableComplexMapKeySerialization().disableHtmlEscaping().create();
-	public static final Gson GSON_PRETTY = new GsonBuilder().enableComplexMapKeySerialization().disableHtmlEscaping().setPrettyPrinting().create();
-
-	private Conf conf;
+	public BlcModApiBungee() {
+		super();
+		this.badlionApi = new BungeeBadlionApi(this);
+		this.messageSender = new BungeePluginMessageSender(this);
+		this.badlionApi.setWaypointManager(new UnsupportedWaypointManager());
+	}
 
 	@Override
 	public void onEnable() {
@@ -29,7 +28,7 @@ public class BlcModApiBungee extends Plugin {
 		}
 
 		try {
-			this.conf = loadConf(new File(this.getDataFolder(), "config.json"));
+			this.badlionApi.loadConfig(new File(this.getDataFolder(), "config.json"));
 
 			// Only register the listener if the config loads successfully
 			this.getProxy().getPluginManager().registerListener(this, new PlayerListener(this));
@@ -43,31 +42,14 @@ public class BlcModApiBungee extends Plugin {
 
 	@Override
 	public void onDisable() {
-
+		this.badlionApi.saveConfig(this.badlionApi.getBadlionConfig(), new File(this.getDataFolder(), "config.json"));
 	}
 
-	public Conf loadConf(File file) throws IOException {
-		try (Reader reader = new FileReader(file)) {
-			return BlcModApiBungee.GSON_NON_PRETTY.fromJson(reader, Conf.class);
-
-		} catch (FileNotFoundException ex) {
-			this.getLogger().log(Level.INFO,"No Config Found: Saving default...");
-			Conf conf = new Conf();
-			this.saveConf(conf, new File(this.getDataFolder(), "config.json"));
-			return conf;
-		}
+	public BungeeBadlionApi getBadlionApi() {
+		return this.badlionApi;
 	}
 
-	private void saveConf(Conf conf, File file) {
-		try (FileWriter writer = new FileWriter(file)) {
-			BlcModApiBungee.GSON_PRETTY.toJson(conf, writer);
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-
-	public Conf getConf() {
-		return this.conf;
+	public BungeePluginMessageSender getMessageSender() {
+		return this.messageSender;
 	}
 }
