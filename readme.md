@@ -8,6 +8,10 @@ We have anticheat warnings for certain features already built into the client an
 
 Since update 2.0.0 this plugin now also replaces both our [CPS API](https://github.com/BadlionClient/BadlionClientCPSAPI) and [Timer API](https://github.com/BadlionClient/BadlionClientTimerAPI). These repositories will be archived, but still supported. But we recommend that you upgrade to this repository instead.
 
+### Hooking into Badlion Mods
+
+With this API you can also hook into some of our mods to enhance the experience for your players even further with our client. You can read more about this and learn how to get started with our documentation on [our wiki page](https://support.badlion.net/hc/en-us/articles/4411226034066-Badlion-Client-Mod-API). 
+
 ### Installation
 
 How to install the Badlion Client Mod API on your server.

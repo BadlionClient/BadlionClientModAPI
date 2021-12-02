@@ -21,7 +21,6 @@ public class BukkitBadlionApi extends AbstractBadlionApi {
 	private Config config;
 
 	public BukkitBadlionApi(BlcModApiBukkit apiBukkit) {
-		super();
 		this.apiBukkit = apiBukkit;
 	}
 

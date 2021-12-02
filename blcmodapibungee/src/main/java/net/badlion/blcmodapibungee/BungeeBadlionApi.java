@@ -21,7 +21,6 @@ public class BungeeBadlionApi extends AbstractBadlionApi {
 	private Config config;
 
 	public BungeeBadlionApi(BlcModApiBungee apiBungee) {
-		super();
 		this.apiBungee = apiBungee;
 	}
 
