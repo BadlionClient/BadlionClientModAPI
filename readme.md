@@ -101,26 +101,6 @@ Below is an example which allows the use of a few commands:
 }
 ```
 
-#### Cosmetics
-
-As part of Badlion Client 3.6, we added a way to disable nametag icons if you want to.
-Here is an example, other kinds of cosmetic might be togglable in the future _(This list will be updated if we add more)_.
-
-```json
-{  
-    "modsDisallowed": {  
-        "Cosmetics": {  
-            "disabled": false,
-            "extra_data": {  
-                "nametag_icons": {  
-                    "disabled": true
-                }
-            }
-        }
-    }
-}
-```
-
 ### Mod Names and Fields that can be disabled
 
 + Animations
