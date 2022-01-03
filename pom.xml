@@ -15,9 +15,9 @@
 
     <modules>
         <module>modapi-common</module>
-        <module>blcmodapibungee</module>
-        <module>blcmodapibukkit</module>
-        <module>blcmodapibukkit-1.17</module>
+        <module>bungee</module>
+        <module>bukkit</module>
+        <module>bukkit-1.17</module>
     </modules>
 
     <licenses>
