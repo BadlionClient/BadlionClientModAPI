@@ -17,7 +17,7 @@
 
     <build>
         <defaultGoal>clean install</defaultGoal>
-        <finalName>badlionclientmodapibungee</finalName>
+        <finalName>Badlion-ModApi-Bungee</finalName>
         <sourceDirectory>src/main/java</sourceDirectory>
         <resources>
             <resource>

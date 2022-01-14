@@ -17,7 +17,7 @@
 
     <build>
         <defaultGoal>clean install</defaultGoal>
-        <finalName>badlionclientmodapibukkit-1.17</finalName>
+        <finalName>Badlion-ModApi-Bukkit-1.17</finalName>
         <sourceDirectory>src/main/java</sourceDirectory>
         <resources>
             <resource>
