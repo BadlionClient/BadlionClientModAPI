@@ -18,6 +18,7 @@
         <module>bungee</module>
         <module>bukkit</module>
         <module>bukkit-1.17</module>
+        <module>velocity</module>
     </modules>
 
     <licenses>
