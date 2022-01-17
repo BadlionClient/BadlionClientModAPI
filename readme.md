@@ -12,6 +12,8 @@ Since update 2.0.0 this plugin now also replaces both our [CPS API](https://gith
 
 With this API you can also hook into some of our mods to enhance the experience for your players even further with our client. You can read more about this and learn how to get started with our documentation on [our wiki page](https://support.badlion.net/hc/en-us/articles/4411226034066-Badlion-Client-Mod-API). 
 
+We've also provided some code examples on how to hook into our mods [here](https://github.com/BadlionClient/BadlionClientModAPI/blob/master/examples.md).
+
 ### Installation
 
 How to install the Badlion Client Mod API on your server.
@@ -64,6 +66,26 @@ It will also limit the player's CPS on the right mouse button to 20, and left mo
             "extra_data": {
                 "flySpeed": {
                     "disabled": true
+                }
+            }
+        }
+    }
+}
+```
+
+#### Remove Hit Delay (1.8)
+
+Remove Hit Delay is an option for 1.8 only where you are able to remove the hit delay, much like on 1.7.10.
+By default, this option is disabled and can be enabled by adding some extra data for the animations mod in the plugin config.
+
+```json
+{  
+    "modsDisallowed": {  
+        "Animations": {  
+            "disabled": false,
+            "extra_data": {  
+                "removeHitDelay": {
+                  "forced": true
                 }
             }
         }
@@ -131,6 +153,7 @@ Below is an example which allows the use of a few commands:
     + alwaysSwing
     + removeTitles
     + oldEnchantGlint
+    + removeHitDelay
 + AntiXray
 + ArmorStatus
     + showMaxDurability
