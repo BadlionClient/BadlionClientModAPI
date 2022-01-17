@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import net.badlion.bukkitapi.BukkitBadlionPlugin;
 import net.badlion.modapicommon.AbstractBadlionApi;
+import net.badlion.modapicommon.mods.ModType;
 import net.badlion.modapicommon.utility.AbstractWaypoint;
 import net.badlion.modapicommon.utility.AbstractWaypointManager;
 import net.badlion.modapicommon.utility.Waypoint;
@@ -115,7 +116,7 @@ public class WaypointManager extends AbstractWaypointManager implements Listener
 		data.addProperty("action", "add");
 		data.add("waypoints", jsonWaypoints);
 
-		this.apiBukkit.getMessageSender().sendModData(player.getUniqueId(), "waypoints", data);
+		this.apiBukkit.getMessageSender().sendModData(player.getUniqueId(), ModType.WAYPOINTS, data);
 
 		waypoints.forEach(waypoint -> {
 			if (!waypoint.isSentBefore()) {

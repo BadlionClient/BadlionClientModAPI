@@ -18,7 +18,7 @@ public class TNTTime {
 	public static void setFuseOffset(int offset) {
 		final JsonObject data = new JsonObject();
 		data.addProperty("fuseOffset", offset);
-		AbstractBadlionApi.getInstance().getPluginMessageSender().sendModData("tntTime", data);
+		AbstractBadlionApi.getInstance().getPluginMessageSender().sendModData(ModType.TNT_TIME, data);
 	}
 
 	/**
@@ -29,7 +29,7 @@ public class TNTTime {
 	public static void setFuseOffset(UUID player, int offset) {
 		final JsonObject data = new JsonObject();
 		data.addProperty("fuseOffset", offset);
-		AbstractBadlionApi.getInstance().getPluginMessageSender().sendModData(player, "tntTime", data);
+		AbstractBadlionApi.getInstance().getPluginMessageSender().sendModData(player, ModType.TNT_TIME, data);
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class TNTTime {
 		final JsonObject data = new JsonObject();
 		data.addProperty("fuseOffset", 0);
 
-		AbstractBadlionApi.getInstance().getPluginMessageSender().sendModData("tntTime", data);
+		AbstractBadlionApi.getInstance().getPluginMessageSender().sendModData(ModType.TNT_TIME, data);
 	}
 
 	/**
@@ -49,6 +49,6 @@ public class TNTTime {
 		final JsonObject data = new JsonObject();
 		data.addProperty("fuseOffset", 0);
 
-		AbstractBadlionApi.getInstance().getPluginMessageSender().sendModData(player, "tntTime", data);
+		AbstractBadlionApi.getInstance().getPluginMessageSender().sendModData(player, ModType.TNT_TIME, data);
 	}
 }

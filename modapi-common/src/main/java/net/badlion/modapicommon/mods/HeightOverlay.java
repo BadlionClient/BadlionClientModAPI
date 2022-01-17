@@ -21,7 +21,7 @@ public class HeightOverlay {
 		data.addProperty("mapName", mapName);
 		data.addProperty("maxHeight", maxHeight);
 
-		AbstractBadlionApi.getInstance().getPluginMessageSender().sendModData("heightOverlay", data);
+		AbstractBadlionApi.getInstance().getPluginMessageSender().sendModData(ModType.HEIGHT_OVERLAY, data);
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class HeightOverlay {
 		data.addProperty("mapName", mapName);
 		data.addProperty("maxHeight", maxHeight);
 
-		AbstractBadlionApi.getInstance().getPluginMessageSender().sendModData(player, "heightOverlay", data);
+		AbstractBadlionApi.getInstance().getPluginMessageSender().sendModData(player, ModType.HEIGHT_OVERLAY, data);
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class HeightOverlay {
 		data.addProperty("mapName", "");
 		data.addProperty("maxHeight", -1);
 
-		AbstractBadlionApi.getInstance().getPluginMessageSender().sendModData("heightOverlay", data);
+		AbstractBadlionApi.getInstance().getPluginMessageSender().sendModData(ModType.HEIGHT_OVERLAY, data);
 	}
 
 	/**
@@ -60,6 +60,6 @@ public class HeightOverlay {
 		data.addProperty("mapName", "");
 		data.addProperty("maxHeight", -1);
 
-		AbstractBadlionApi.getInstance().getPluginMessageSender().sendModData(player, "heightOverlay", data);
+		AbstractBadlionApi.getInstance().getPluginMessageSender().sendModData(player, ModType.HEIGHT_OVERLAY, data);
 	}
 }

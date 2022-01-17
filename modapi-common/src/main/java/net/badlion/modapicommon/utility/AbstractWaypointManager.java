@@ -2,6 +2,7 @@ package net.badlion.modapicommon.utility;
 
 import com.google.gson.JsonObject;
 import net.badlion.modapicommon.AbstractBadlionApi;
+import net.badlion.modapicommon.mods.ModType;
 
 import java.util.UUID;
 
@@ -35,6 +36,6 @@ public abstract class AbstractWaypointManager {
 		final JsonObject data = new JsonObject();
 		data.addProperty("action", "reset");
 
-		AbstractBadlionApi.getInstance().getPluginMessageSender().sendModData(player, "waypoints", data);
+		AbstractBadlionApi.getInstance().getPluginMessageSender().sendModData(player, ModType.WAYPOINTS, data);
 	}
 }
