@@ -8,7 +8,7 @@ Below are some examples of how you could hook into our mods using this API.
 * [Notifications](https://github.com/BadlionClient/BadlionClientModAPI/blob/master/examples.md#notifications)
   * [Click Event Types](https://github.com/BadlionClient/BadlionClientModAPI/blob/master/examples.md#click-event-types)
   * [Levels](https://github.com/BadlionClient/BadlionClientModAPI/blob/master/examples.md#levels)
-
+* [Cosmetics](https://github.com/BadlionClient/BadlionClientModAPI/blob/master/examples.md#cosmetics)
 
 ## Waypoints
 
@@ -197,3 +197,24 @@ There are different notification levels to choose from.
 * `INFO` a simple notification with a blue info texture.
 * `ERROR`/`WARNING` shows that something went wrong.
 * `SUCCESS` shows that something went successful with a green checkmark.
+
+## Cosmetics
+
+You can disable cosmetics using our API. For now we only allow nametag cosmetics to be toggled.
+It could be used in a /nick implementation for example.
+
+```java
+public class NickManager {
+    public void addUserNick(Player player) {
+        // ... Your own code
+
+        Cosmetics.disableNametagCosmetics(player.getUniqueId());
+    }
+
+    public void removeUserNick(Player player) {
+        // ... Your own code
+
+        Cosmetics.enableNametagCosmetics(player.getUniqueId());
+    }
+}
+```
