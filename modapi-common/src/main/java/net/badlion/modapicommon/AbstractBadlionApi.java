@@ -2,6 +2,7 @@ package net.badlion.modapicommon;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import net.badlion.modapicommon.utility.AbstractCosmeticManager;
 import net.badlion.modapicommon.utility.AbstractWaypointManager;
 
 import java.io.File;
@@ -14,8 +15,9 @@ public abstract class AbstractBadlionApi {
 	private static AbstractBadlionApi instance;
 
 	private AbstractWaypointManager waypointManager;
+	private AbstractCosmeticManager cosmeticManager;
 
-	public AbstractBadlionApi() {
+	protected AbstractBadlionApi() {
 		AbstractBadlionApi.instance = this;
 	}
 
@@ -53,6 +55,25 @@ public abstract class AbstractBadlionApi {
 		return this.waypointManager;
 	}
 
+	/**
+	 * Sets the implementation for the {@link AbstractCosmeticManager} class.
+	 */
+	public void setCosmeticManager(AbstractCosmeticManager cosmeticManager) {
+		this.cosmeticManager = cosmeticManager;
+	}
+
+	/**
+	 * Returns the implementation for the {@link AbstractCosmeticManager} class.
+	 */
+	public AbstractCosmeticManager getCosmeticManager() {
+		return this.cosmeticManager;
+	}
+
+	/**
+	 * Returns the Badlion Api instance.
+	 *
+	 * @return The current Badlion Api instance
+	 */
 	public static AbstractBadlionApi getInstance() {
 		return AbstractBadlionApi.instance;
 	}

@@ -35,6 +35,7 @@ public class PlayerListener implements Listener {
 		this.plugin.getMessageSender().sendPluginMessagePacket(player, TimerApi.CHANNEL_NAME, "CHANGE_WORLD|{}".getBytes(StandardCharsets.UTF_8));
 
 		this.plugin.getWaypointManager().onPlayerJoin(player);
+		this.plugin.getCosmeticManager().onPlayerJoin(player);
 
 		Bukkit.getScheduler().runTaskLater(this.plugin, () -> this.plugin.getWaypointManager().sendWaypointsToClient(player, player.getWorld()), 40);
 	}

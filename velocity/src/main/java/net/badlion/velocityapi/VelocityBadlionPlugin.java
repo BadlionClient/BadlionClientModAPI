@@ -6,6 +6,7 @@ import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.event.proxy.ProxyShutdownEvent;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.proxy.ProxyServer;
+import net.badlion.velocityapi.cosmetics.UnsupportedCosmeticManager;
 import net.badlion.velocityapi.listener.PlayerListener;
 import net.badlion.velocityapi.waypoints.UnsupportedWaypointManager;
 import org.slf4j.Logger;
@@ -34,6 +35,7 @@ public class VelocityBadlionPlugin {
 		this.messageSender = new VelocityPluginMessageSender(this);
 		this.dataFolder = new File("plugins", "BadlionClientModAPI");
 		this.badlionApi.setWaypointManager(new UnsupportedWaypointManager());
+		this.badlionApi.setCosmeticManager(new UnsupportedCosmeticManager());
 	}
 
 	@Subscribe

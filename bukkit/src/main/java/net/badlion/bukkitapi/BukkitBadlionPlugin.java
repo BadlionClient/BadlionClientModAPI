@@ -1,5 +1,6 @@
 package net.badlion.bukkitapi;
 
+import net.badlion.bukkitapi.cosmetics.CosmeticManager;
 import net.badlion.bukkitapi.listener.PlayerListener;
 import net.badlion.bukkitapi.timers.TimerApi;
 import net.badlion.bukkitapi.timers.TimerApiImpl;
@@ -15,6 +16,7 @@ public class BukkitBadlionPlugin extends JavaPlugin {
 	private final BukkitPluginMessageSender messageSender;
 	private final TimerApiImpl timerApi;
 	private final WaypointManager waypointManager;
+	private final CosmeticManager cosmeticManager;
 
 	public BukkitBadlionPlugin() {
 		this.badlionApi = new BukkitBadlionApi(this);
@@ -22,6 +24,8 @@ public class BukkitBadlionPlugin extends JavaPlugin {
 		this.timerApi = new TimerApiImpl(this);
 		this.waypointManager = new WaypointManager(this);
 		this.badlionApi.setWaypointManager(this.waypointManager);
+		this.cosmeticManager = new CosmeticManager();
+		this.badlionApi.setCosmeticManager(this.cosmeticManager);
 	}
 
 	@Override
@@ -45,6 +49,7 @@ public class BukkitBadlionPlugin extends JavaPlugin {
 			// Only register the listener if the config loads successfully
 			this.getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
 			this.getServer().getPluginManager().registerEvents(this.waypointManager, this);
+			this.getServer().getPluginManager().registerEvents(this.cosmeticManager, this);
 
 			this.getServer().getScheduler().runTaskTimer(this, new Runnable() {
 				@Override
@@ -87,5 +92,9 @@ public class BukkitBadlionPlugin extends JavaPlugin {
 
 	public WaypointManager getWaypointManager() {
 		return this.waypointManager;
+	}
+
+	public CosmeticManager getCosmeticManager() {
+		return this.cosmeticManager;
 	}
 }
