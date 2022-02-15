@@ -153,7 +153,10 @@ Below is an example which allows the use of a few commands:
     + alwaysSwing
     + removeTitles
     + oldEnchantGlint
+    + leftHanded
+    + noSmallArms
     + removeHitDelay
+    + fixLiquidPlace
 + AntiXray
 + ArmorStatus
     + showMaxDurability
@@ -169,6 +172,7 @@ Below is an example which allows the use of a few commands:
 + AutoText
 + AutoTip
 + Bedwars Beds
++ Bedwars Upgrade Display
 + Block Counter
 + Block Overlay
 + BlockInfo
@@ -185,9 +189,9 @@ Below is an example which allows the use of a few commands:
     + italicsEffect
     + soundEffect
     + smoothChat
+    + noCloseMyChat
 + Chunk Borders
 + Clear Glass
-+ ClearWater
 + Clock
 + ColorSaturation
 + Combo Counter
@@ -226,12 +230,14 @@ Below is an example which allows the use of a few commands:
     + dot
     + vanillaBlendering
 + Custom Fonts
++ Damage Tint
 + Direction
 + EnchantGlint
 + FOV Changer
 + FPS
     + reversed
 + Fullbright
++ GUI
 + Hit Color
 + Hitboxes
     + animalHitBoxesEnabled
@@ -267,10 +273,10 @@ Below is an example which allows the use of a few commands:
 + Name Tags
 + NickHider
 + NotEnoughUpdates
-+ Notifications
 + OofMod
 + Pack Display
 + Pack Tweaks
+    + customSky
 + Particles
 + Perspective
 + Ping
@@ -288,8 +294,10 @@ Below is an example which allows the use of a few commands:
     + removeNumberOffset
 + Server Address
     + showIcon
++ Shaders
 + Shinypots
 + Skyblock
++ Speedometer
 + Stopwatch
 + Tab
 + TcpNoDelay
