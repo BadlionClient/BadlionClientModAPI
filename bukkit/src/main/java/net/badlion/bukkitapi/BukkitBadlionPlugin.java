@@ -73,11 +73,6 @@ public class BukkitBadlionPlugin extends JavaPlugin {
 		}
 	}
 
-	@Override
-	public void onDisable() {
-		this.badlionApi.saveConfig(this.badlionApi.getBadlionConfig(), new File(this.getDataFolder(), "config.json"));
-	}
-
 	public BukkitBadlionApi getBadlionApi() {
 		return this.badlionApi;
 	}

@@ -42,11 +42,6 @@ public class BungeeBadlionPlugin extends Plugin {
 		}
 	}
 
-	@Override
-	public void onDisable() {
-		this.badlionApi.saveConfig(this.badlionApi.getBadlionConfig(), new File(this.getDataFolder(), "config.json"));
-	}
-
 	public BungeeBadlionApi getBadlionApi() {
 		return this.badlionApi;
 	}

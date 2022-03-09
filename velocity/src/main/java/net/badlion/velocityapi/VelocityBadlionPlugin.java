@@ -58,11 +58,6 @@ public class VelocityBadlionPlugin {
 		}
 	}
 
-	@Subscribe
-	public void onProxyShutdown(ProxyShutdownEvent event) {
-		this.badlionApi.saveConfig(this.badlionApi.getBadlionConfig(), new File(this.getDataFolder(), "config.json"));
-	}
-
 	public ProxyServer getProxy() {
 		return this.proxyServer;
 	}
