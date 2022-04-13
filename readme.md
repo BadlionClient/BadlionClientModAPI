@@ -155,6 +155,7 @@ Below is an example which allows the use of a few commands:
     + oldEnchantGlint
     + leftHanded
     + noSmallArms
+    + noShake
     + removeHitDelay
     + fixLiquidPlace
 + AntiXray
@@ -167,16 +168,16 @@ Below is an example which allows the use of a few commands:
     + chestPiece
     + helmetPiece
     + offHandPiece
-+ AutoFriend
++ Auto Friend
++ Auto Text
 + AutoGG
-+ AutoText
 + AutoTip
 + Bedwars Beds
 + Bedwars Upgrade Display
 + Block Counter
++ Block Info
 + Block Overlay
-+ BlockInfo
-+ BossBar
++ Boss Bar
 + Chat
     + textBackgroundShadow
     + timeStamp24h
@@ -193,7 +194,7 @@ Below is an example which allows the use of a few commands:
 + Chunk Borders
 + Clear Glass
 + Clock
-+ ColorSaturation
++ Color Saturation
 + Combo Counter
 + Coordinates
     + roundLocation
@@ -232,7 +233,7 @@ Below is an example which allows the use of a few commands:
 + Custom Fonts
 + Damage Tint
 + Direction
-+ EnchantGlint
++ Enchant Glint
 + FOV Changer
 + FPS
     + reversed
@@ -254,24 +255,24 @@ Below is an example which allows the use of a few commands:
     + snowballHitboxesEnabled
     + xporbHitboxesEnabled
     + player1_7HitboxesEnabled
-+ InventoryBlur
++ Inventory Blur
 + Item Counter
 + Item Info
 + Item Physics
 + Item Tracker
-+ JustEnoughItems
++ Just Enough Items
 + Keystrokes
 + LevelHead
 + Light Overlay
 + Memory
-+ MiniMap
++ Minimap
 + MLG Cobweb
-+ MotionBlur
-+ MumbleLink
++ Motion Blur
++ Mumble Link
 + Music
 + Name History
 + Name Tags
-+ NickHider
++ Nick Hider
 + NotEnoughUpdates
 + OofMod
 + Pack Display
@@ -281,8 +282,9 @@ Below is an example which allows the use of a few commands:
 + Perspective
 + Ping
 + Player Counter
-+ PotionStatus
++ Potion Status
 + Protection
++ PvP Info
 + Quickplay
 + Reach Display
 + Replay
@@ -300,9 +302,10 @@ Below is an example which allows the use of a few commands:
 + Speedometer
 + Stopwatch
 + Tab
++ Tactical Markers
 + TcpNoDelay
 + TeamSpeak
-+ TimeChanger
++ Time Changer
 + Timers
 + TNT Time
 + ToggleChat
@@ -312,7 +315,7 @@ Below is an example which allows the use of a few commands:
     + flySpeed
 + Uptime
 + Waypoints
-+ WeatherChanger
++ Weather Changer
 + World Edit CUI
 + Zoom
     + useOptifineZoom
