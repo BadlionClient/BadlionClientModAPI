@@ -1,6 +1,6 @@
 package net.badlion.bukkitapi.timers;
 
-import net.badlion.bukkitapi.BukkitBadlionPlugin;
+import net.badlion.bukkitapi.AbstractBukkitBadlionPlugin;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -13,15 +13,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class TimerApiImpl extends TimerApi {
 
-	private final BukkitBadlionPlugin plugin;
+	private final AbstractBukkitBadlionPlugin plugin;
 	private final AtomicInteger idGenerator;
 	private final Set<TimerImpl> allTimers;
 
-	public TimerApiImpl(BukkitBadlionPlugin plugin) {
+	public TimerApiImpl(AbstractBukkitBadlionPlugin plugin) {
 		TimerApi.instance = this;
 		this.plugin = plugin;
 		this.idGenerator = new AtomicInteger(1);
-		this.allTimers = Collections.newSetFromMap(new ConcurrentHashMap<TimerImpl, Boolean>());
+		this.allTimers = Collections.newSetFromMap(new ConcurrentHashMap<>());
 	}
 
 	@Override

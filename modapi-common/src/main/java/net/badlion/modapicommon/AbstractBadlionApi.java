@@ -23,26 +23,38 @@ public abstract class AbstractBadlionApi {
 
 	/**
 	 * Loads the necessary Badlion API configurations.
+	 *
+	 * @param file Config file to load
+	 * @throws IOException Exception if anything went wrong while loading the config
 	 */
 	public abstract void loadConfig(File file) throws IOException;
 
 	/**
 	 * Saves the necessary Badlion API configurations.
+	 *
+	 * @param config Configuration to save
+	 * @param file   Output file
 	 */
 	public abstract void saveConfig(Config config, File file);
 
 	/**
 	 * Returns the Badlion {@link Config} object.
+	 *
+	 * @return The config instance
 	 */
 	public abstract Config getBadlionConfig();
 
 	/**
 	 * Returns the {@link AbstractPluginMessageSender} responsible for sending plugin messages.
+	 *
+	 * @return The plugin message sender instance
 	 */
 	public abstract AbstractPluginMessageSender getPluginMessageSender();
 
 	/**
 	 * Sets the implementation for the {@link AbstractWaypointManager} class.
+	 *
+	 * @param waypointManager The waypoint manager instance
 	 */
 	public void setWaypointManager(AbstractWaypointManager waypointManager) {
 		this.waypointManager = waypointManager;
@@ -50,6 +62,8 @@ public abstract class AbstractBadlionApi {
 
 	/**
 	 * Returns the implementation for the {@link AbstractWaypointManager} class.
+	 *
+	 * @return The waypoint manager instance
 	 */
 	public AbstractWaypointManager getWaypointManager() {
 		return this.waypointManager;
@@ -57,6 +71,8 @@ public abstract class AbstractBadlionApi {
 
 	/**
 	 * Sets the implementation for the {@link AbstractCosmeticManager} class.
+	 *
+	 * @param cosmeticManager The cosmetic manager instance
 	 */
 	public void setCosmeticManager(AbstractCosmeticManager cosmeticManager) {
 		this.cosmeticManager = cosmeticManager;
@@ -64,6 +80,8 @@ public abstract class AbstractBadlionApi {
 
 	/**
 	 * Returns the implementation for the {@link AbstractCosmeticManager} class.
+	 *
+	 * @return The cosmetic manager instance
 	 */
 	public AbstractCosmeticManager getCosmeticManager() {
 		return this.cosmeticManager;

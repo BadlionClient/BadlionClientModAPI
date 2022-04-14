@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>bukkit</artifactId>
+    <artifactId>bukkit-common</artifactId>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,7 +17,7 @@
 
     <build>
         <defaultGoal>clean install</defaultGoal>
-        <finalName>Badlion-ModApi-Bukkit</finalName>
+        <finalName>Badlion-ModApi-Bukkit-Common</finalName>
         <sourceDirectory>src/main/java</sourceDirectory>
         <resources>
             <resource>
@@ -40,26 +40,13 @@
                     <target>8</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.1.0</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 
     <dependencies>
         <dependency>
             <groupId>net.badlion</groupId>
-            <artifactId>bukkit-common</artifactId>
+            <artifactId>modapi-common</artifactId>
             <version>2.0.0</version>
             <scope>compile</scope>
         </dependency>

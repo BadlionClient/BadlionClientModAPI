@@ -8,7 +8,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import net.badlion.bukkitapi.BukkitBadlionPlugin;
+import net.badlion.bukkitapi.AbstractBukkitBadlionPlugin;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -27,7 +27,7 @@ public class TimerImpl implements Timer {
 		.registerTypeAdapter(TimerImpl.class, new TimerSerializer())
 		.create();
 
-	private final BukkitBadlionPlugin plugin;
+	private final AbstractBukkitBadlionPlugin plugin;
 
 	private final long id;
 	// Optimization
@@ -37,12 +37,12 @@ public class TimerImpl implements Timer {
 	private boolean repeating;
 	private long time;
 	private long millis;
-	private AtomicBoolean updated;
-	private Set<Player> receivers;
+	private final AtomicBoolean updated;
+	private final Set<Player> receivers;
 	private long currentTime;
 	private long lastTick;
 
-	public TimerImpl(BukkitBadlionPlugin plugin, long id, String name, ItemStack item, boolean repeating, long time) {
+	public TimerImpl(AbstractBukkitBadlionPlugin plugin, long id, String name, ItemStack item, boolean repeating, long time) {
 		this.plugin = plugin;
 		this.id = id;
 		this.name = name;
@@ -54,13 +54,13 @@ public class TimerImpl implements Timer {
 		this.lastTick = System.currentTimeMillis();
 
 		this.updated = new AtomicBoolean(false);
-		this.receivers = Collections.newSetFromMap(new ConcurrentHashMap<Player, Boolean>());
+		this.receivers = Collections.newSetFromMap(new ConcurrentHashMap<>());
 
 		this.removeReceiverRequest = new RemoveReceiverRequest();
 		this.removeReceiverRequest.id = id;
 	}
 
-	public TimerImpl(BukkitBadlionPlugin plugin, int id, String name, ItemStack item, boolean repeating, long time, TimeUnit timeUnit) {
+	public TimerImpl(AbstractBukkitBadlionPlugin plugin, int id, String name, ItemStack item, boolean repeating, long time, TimeUnit timeUnit) {
 		this.plugin = plugin;
 		this.id = id;
 		this.name = name;
@@ -72,7 +72,7 @@ public class TimerImpl implements Timer {
 		this.lastTick = System.currentTimeMillis();
 
 		this.updated = new AtomicBoolean(false);
-		this.receivers = Collections.newSetFromMap(new ConcurrentHashMap<Player, Boolean>());
+		this.receivers = Collections.newSetFromMap(new ConcurrentHashMap<>());
 
 		this.removeReceiverRequest = new RemoveReceiverRequest();
 		this.removeReceiverRequest.id = id;

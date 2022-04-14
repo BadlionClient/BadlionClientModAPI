@@ -4,7 +4,7 @@ import com.google.common.collect.Queues;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import net.badlion.bukkitapi.BukkitBadlionPlugin;
+import net.badlion.bukkitapi.AbstractBukkitBadlionPlugin;
 import net.badlion.modapicommon.AbstractBadlionApi;
 import net.badlion.modapicommon.mods.ModType;
 import net.badlion.modapicommon.utility.AbstractWaypoint;
@@ -34,13 +34,13 @@ import java.util.stream.Collectors;
 
 public class WaypointManager extends AbstractWaypointManager implements Listener {
 
-	private final BukkitBadlionPlugin apiBukkit;
+	private final AbstractBukkitBadlionPlugin apiBukkit;
 	private final ConcurrentHashMap<UUID, List<AbstractWaypoint>> playerWaypoints = new ConcurrentHashMap<>();
 	private final Queue<UUID> scheduledUpdates = Queues.newConcurrentLinkedQueue();
 
 	private List<ConfigWaypoint> configWaypoints = new ArrayList<>();
 
-	public WaypointManager(BukkitBadlionPlugin apiBukkit) {
+	public WaypointManager(AbstractBukkitBadlionPlugin apiBukkit) {
 		this.apiBukkit = apiBukkit;
 	}
 

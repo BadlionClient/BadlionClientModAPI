@@ -17,10 +17,10 @@ import java.nio.file.Path;
 import java.util.logging.Level;
 
 public class BukkitBadlionApi extends AbstractBadlionApi {
-	private final BukkitBadlionPlugin apiBukkit;
+	private final AbstractBukkitBadlionPlugin apiBukkit;
 	private Config config;
 
-	public BukkitBadlionApi(BukkitBadlionPlugin apiBukkit) {
+	public BukkitBadlionApi(AbstractBukkitBadlionPlugin apiBukkit) {
 		this.apiBukkit = apiBukkit;
 	}
 

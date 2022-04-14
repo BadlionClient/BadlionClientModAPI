@@ -24,6 +24,7 @@ public class TNTTime {
 	/**
 	 * Sets the TNTTime fuse counter offset for a specific Badlion user.
 	 *
+	 * @param player The player who will receive the counter
 	 * @param offset Fuse ticks to add or subtract from 80 (vanilla fuse time value)
 	 */
 	public static void setFuseOffset(UUID player, int offset) {
@@ -44,6 +45,8 @@ public class TNTTime {
 
 	/**
 	 * Resets the TNTTime fuse offset so that nothing is applied for a specific Badlion user.
+	 *
+	 * @param player The player who will receive the counter
 	 */
 	public static void resetFuseOffset(UUID player) {
 		final JsonObject data = new JsonObject();

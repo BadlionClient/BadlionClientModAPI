@@ -1,6 +1,5 @@
 package net.badlion.bukkitapi;
 
-import net.badlion.modapicommon.AbstractPluginMessageSender;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -9,11 +8,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.UUID;
 
-public class BukkitPluginMessageSender extends AbstractPluginMessageSender {
+public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender {
 
-	private final BukkitBadlionPlugin apiBukkit;
+	private final AbstractBukkitBadlionPlugin apiBukkit;
 
 	private final Method getHandleMethod;
 	private final Field playerConnectionField;
@@ -32,7 +30,7 @@ public class BukkitPluginMessageSender extends AbstractPluginMessageSender {
 	private Method wrappedBufferMethod;
 
 
-	public BukkitPluginMessageSender(BukkitBadlionPlugin apiBukkit) {
+	public BukkitPluginMessageSender(AbstractBukkitBadlionPlugin apiBukkit) {
 		this.apiBukkit = apiBukkit;
 
 		// Get the v1_X_Y from the end of the package name, e.g. v_1_7_R4 or v_1_12_R1
@@ -145,21 +143,6 @@ public class BukkitPluginMessageSender extends AbstractPluginMessageSender {
 	}
 
 	@Override
-	public void sendPluginMessage(byte[] data) {
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			this.sendPluginMessagePacket(player, "badlion:modapi", data);
-		}
-	}
-
-	@Override
-	public void sendPluginMessage(UUID player, byte[] data) {
-		final Player bukkitPlayer = Bukkit.getPlayer(player);
-
-		if (bukkitPlayer != null) {
-			this.sendPluginMessagePacket(bukkitPlayer, "badlion:modapi", data);
-		}
-	}
-
 	public void sendPluginMessagePacket(Player player, String channel, Object data) {
 		try {
 			Object packet;

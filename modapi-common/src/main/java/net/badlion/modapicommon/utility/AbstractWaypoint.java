@@ -21,6 +21,8 @@ public abstract class AbstractWaypoint {
 
 	/**
 	 * Returns the location of this waypoint.
+	 *
+	 * @return The location of this waypoint
 	 */
 	public Location getLocation() {
 		return this.location;
@@ -28,6 +30,8 @@ public abstract class AbstractWaypoint {
 
 	/**
 	 * Returns the name of this waypoint, color codes allowed.
+	 *
+	 * @return The name of this waypoint
 	 */
 	public String getName() {
 		return this.name;
@@ -35,6 +39,8 @@ public abstract class AbstractWaypoint {
 
 	/**
 	 * Returns whether or not the user could add this waypoint from the client (prompted with a chat message).
+	 *
+	 * @return {@code true} if the user can add this waypoint through chat, {@code false} otherwise
 	 */
 	public boolean isAllowToAdd() {
 		return this.allowToAdd;
@@ -42,6 +48,8 @@ public abstract class AbstractWaypoint {
 
 	/**
 	 * Sets whether or not this waypoint has been sent before to the player.
+	 *
+	 * @param sentBefore If the waypoint has been sent before
 	 */
 	public void setSentBefore(boolean sentBefore) {
 		this.sentBefore = sentBefore;
@@ -49,6 +57,8 @@ public abstract class AbstractWaypoint {
 
 	/**
 	 * Whether or not this waypoint has been sent before to the player.
+	 *
+	 * @return {@code true} if the waypoint has been sent before, {@code false} otherwise
 	 */
 	public boolean isSentBefore() {
 		return this.sentBefore;
@@ -56,6 +66,8 @@ public abstract class AbstractWaypoint {
 
 	/**
 	 * The extending class of this {@link AbstractWaypoint}.
+	 *
+	 * @return The type of this class
 	 */
 	public abstract Class<? extends AbstractWaypoint> getType();
 }

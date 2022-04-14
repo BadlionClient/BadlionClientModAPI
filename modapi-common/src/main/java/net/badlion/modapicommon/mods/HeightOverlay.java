@@ -54,6 +54,8 @@ public class HeightOverlay {
 	/**
 	 * Resets the height overlay limit and stops displaying the mod for a specific online Badlion user.
 	 * This should be used when you no longer want to show the mod for the user.
+	 *
+	 * @param player The player to reset
 	 */
 	public static void reset(UUID player) {
 		final JsonObject data = new JsonObject();

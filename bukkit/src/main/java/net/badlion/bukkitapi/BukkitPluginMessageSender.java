@@ -1,6 +1,5 @@
 package net.badlion.bukkitapi;
 
-import net.badlion.modapicommon.AbstractPluginMessageSender;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -9,24 +8,19 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.UUID;
 
-public class BukkitPluginMessageSender extends AbstractPluginMessageSender {
+public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender {
 
-	private BukkitBadlionPlugin apiBukkit;
+	private final AbstractBukkitBadlionPlugin apiBukkit;
 
 	private String versionSuffix;
 
-	private Class<?> craftPlayerClass;
-	private Method getHandleMethod;
+	private final Method getHandleMethod;
 
-	private Class<?> nmsPlayerClass;
-	private Field playerConnectionField;
+	private final Field playerConnectionField;
 
-	private Class<?> playerConnectionClass;
-	private Method sendPacketMethod;
+	private final Method sendPacketMethod;
 
-	private Class<?> packetPlayOutCustomPayloadClass;
 	private Constructor<?> packetPlayOutCustomPayloadConstructor;
 	private Constructor<?> packetPlayOutMinecraftKeyConstructor;
 	private boolean useMinecraftKey;
@@ -35,12 +29,9 @@ public class BukkitPluginMessageSender extends AbstractPluginMessageSender {
 	private Class<?> packetDataSerializerClass;
 	private Constructor<?> packetDataSerializerConstructor;
 
-	// Netty classes used by newer 1.8 and newer
-	private Class<?> byteBufClass;
-	private Class<?> unpooledClass;
 	private Method wrappedBufferMethod;
 
-	public BukkitPluginMessageSender(BukkitBadlionPlugin apiBukkit) {
+	public BukkitPluginMessageSender(AbstractBukkitBadlionPlugin apiBukkit) {
 		this.apiBukkit = apiBukkit;
 
 		// Get the v1_X_Y from the end of the package name, e.g. v_1_7_R4 or v_1_12_R1
@@ -59,27 +50,27 @@ public class BukkitPluginMessageSender extends AbstractPluginMessageSender {
 		}
 
 		// We need to use reflection because Bukkit by default handles plugin messages in a really silly way
-		this.craftPlayerClass = this.getClass("org.bukkit.craftbukkit." + this.versionSuffix + ".entity.CraftPlayer");
-		if (this.craftPlayerClass == null) {
+		Class<?> craftPlayerClass = this.getClass("org.bukkit.craftbukkit." + this.versionSuffix + ".entity.CraftPlayer");
+		if (craftPlayerClass == null) {
 			throw new RuntimeException("Failed to find CraftPlayer class");
 		}
 
-		this.nmsPlayerClass = this.getClass("net.minecraft.server." + this.versionSuffix + ".EntityPlayer");
-		if (this.nmsPlayerClass == null) {
+		Class<?> nmsPlayerClass = this.getClass("net.minecraft.server." + this.versionSuffix + ".EntityPlayer");
+		if (nmsPlayerClass == null) {
 			throw new RuntimeException("Failed to find EntityPlayer class");
 		}
 
-		this.playerConnectionClass = this.getClass("net.minecraft.server." + this.versionSuffix + ".PlayerConnection");
-		if (this.playerConnectionClass == null) {
+		Class<?> playerConnectionClass = this.getClass("net.minecraft.server." + this.versionSuffix + ".PlayerConnection");
+		if (playerConnectionClass == null) {
 			throw new RuntimeException("Failed to find PlayerConnection class");
 		}
 
-		this.packetPlayOutCustomPayloadClass = this.getClass("net.minecraft.server." + this.versionSuffix + ".PacketPlayOutCustomPayload");
-		if (this.packetPlayOutCustomPayloadClass == null) {
+		Class<?> packetPlayOutCustomPayloadClass = this.getClass("net.minecraft.server." + this.versionSuffix + ".PacketPlayOutCustomPayload");
+		if (packetPlayOutCustomPayloadClass == null) {
 			throw new RuntimeException("Failed to find PacketPlayOutCustomPayload class");
 		}
 
-		this.packetPlayOutCustomPayloadConstructor = this.getConstructor(this.packetPlayOutCustomPayloadClass, String.class, byte[].class);
+		this.packetPlayOutCustomPayloadConstructor = this.getConstructor(packetPlayOutCustomPayloadClass, String.class, byte[].class);
 		if (this.packetPlayOutCustomPayloadConstructor == null) {
 			// Newer versions of Minecraft use a different custom packet system
 			this.packetDataSerializerClass = this.getClass("net.minecraft.server." + this.versionSuffix + ".PacketDataSerializer");
@@ -87,33 +78,34 @@ public class BukkitPluginMessageSender extends AbstractPluginMessageSender {
 				throw new RuntimeException("Failed to find PacketPlayOutCustomPayload constructor or PacketDataSerializer class");
 			}
 
-			this.byteBufClass = this.getClass("io.netty.buffer.ByteBuf");
-			if (this.byteBufClass == null) {
+			// Netty classes used by newer 1.8 and newer
+			Class<?> byteBufClass = this.getClass("io.netty.buffer.ByteBuf");
+			if (byteBufClass == null) {
 				throw new RuntimeException("Failed to find PacketPlayOutCustomPayload constructor or ByteBuf class");
 			}
 
-			this.packetDataSerializerConstructor = this.getConstructor(this.packetDataSerializerClass, this.byteBufClass);
+			this.packetDataSerializerConstructor = this.getConstructor(this.packetDataSerializerClass, byteBufClass);
 			if (this.packetDataSerializerConstructor == null) {
 				throw new RuntimeException("Failed to find PacketPlayOutCustomPayload constructor or PacketDataSerializer constructor");
 			}
 
-			this.unpooledClass = this.getClass("io.netty.buffer.Unpooled");
-			if (this.unpooledClass == null) {
+			Class<?> unpooledClass = this.getClass("io.netty.buffer.Unpooled");
+			if (unpooledClass == null) {
 				throw new RuntimeException("Failed to find PacketPlayOutCustomPayload constructor or Unpooled class");
 			}
 
-			this.wrappedBufferMethod = this.getMethod(this.unpooledClass, "wrappedBuffer", byte[].class);
+			this.wrappedBufferMethod = this.getMethod(unpooledClass, "wrappedBuffer", byte[].class);
 			if (this.wrappedBufferMethod == null) {
 				throw new RuntimeException("Failed to find PacketPlayOutCustomPayload constructor or wrappedBuffer()");
 			}
 
 			// If we made it this far in theory we are on at least 1.8
-			this.packetPlayOutCustomPayloadConstructor = this.getConstructor(this.packetPlayOutCustomPayloadClass, String.class, this.packetDataSerializerClass);
+			this.packetPlayOutCustomPayloadConstructor = this.getConstructor(packetPlayOutCustomPayloadClass, String.class, this.packetDataSerializerClass);
 			if (this.packetPlayOutCustomPayloadConstructor == null) {
 				Class<?> minecraftKeyClass = this.getClass("net.minecraft.server." + this.versionSuffix + ".MinecraftKey");
 
 				// Fix for Paper in newer versions
-				this.packetPlayOutCustomPayloadConstructor = this.getConstructor(this.packetPlayOutCustomPayloadClass, minecraftKeyClass, this.packetDataSerializerClass);
+				this.packetPlayOutCustomPayloadConstructor = this.getConstructor(packetPlayOutCustomPayloadClass, minecraftKeyClass, this.packetDataSerializerClass);
 
 				if (this.packetPlayOutCustomPayloadConstructor == null) {
 					throw new RuntimeException("Failed to find PacketPlayOutCustomPayload constructor 2x");
@@ -124,38 +116,23 @@ public class BukkitPluginMessageSender extends AbstractPluginMessageSender {
 			}
 		}
 
-		this.getHandleMethod = this.getMethod(this.craftPlayerClass, "getHandle");
+		this.getHandleMethod = this.getMethod(craftPlayerClass, "getHandle");
 		if (this.getHandleMethod == null) {
 			throw new RuntimeException("Failed to find CraftPlayer.getHandle()");
 		}
 
-		this.playerConnectionField = this.getField(this.nmsPlayerClass, "playerConnection");
+		this.playerConnectionField = this.getField(nmsPlayerClass, "playerConnection");
 		if (this.playerConnectionField == null) {
 			throw new RuntimeException("Failed to find EntityPlayer.playerConnection");
 		}
 
-		this.sendPacketMethod = this.getMethod(this.playerConnectionClass, "sendPacket");
+		this.sendPacketMethod = this.getMethod(playerConnectionClass, "sendPacket");
 		if (this.sendPacketMethod == null) {
 			throw new RuntimeException("Failed to find PlayerConnection.sendPacket()");
 		}
 	}
 
 	@Override
-	public void sendPluginMessage(byte[] data) {
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			this.sendPluginMessagePacket(player, "badlion:modapi", data);
-		}
-	}
-
-	@Override
-	public void sendPluginMessage(UUID player, byte[] data) {
-		final Player bukkitPlayer = Bukkit.getPlayer(player);
-
-		if (bukkitPlayer != null) {
-			this.sendPluginMessagePacket(bukkitPlayer, "badlion:modapi", data);
-		}
-	}
-
 	public void sendPluginMessagePacket(Player player, String channel, Object data) {
 		try {
 			Object packet;

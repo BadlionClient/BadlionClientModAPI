@@ -33,7 +33,8 @@ public class Waypoints {
 	/**
 	 * Deletes a waypoint by a specific ID.
 	 *
-	 * @param id ID of the waypoint to delete.
+	 * @param player The player this waypoint should be added for.
+	 * @param id     ID of the waypoint to delete.
 	 */
 	public static void deleteWaypoint(UUID player, int id) {
 		AbstractBadlionApi.getInstance().getWaypointManager().removePlayerWaypoint(player, id);

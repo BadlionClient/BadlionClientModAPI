@@ -46,6 +46,9 @@ public abstract class AbstractPluginMessageSender {
 
 	/**
 	 * Used to send data unrelated to mods to the client.
+	 *
+	 * @param type Type of message to send
+	 * @param data Json data to send
 	 */
 	public void sendData(String type, JsonElement data) {
 		final JsonObject object = new JsonObject();
@@ -58,6 +61,10 @@ public abstract class AbstractPluginMessageSender {
 
 	/**
 	 * Used to send data unrelated to mods to the client.
+	 *
+	 * @param player Player who will receive the data
+	 * @param type   Type of message to send
+	 * @param data   Json data to send
 	 */
 	public void sendData(UUID player, String type, JsonElement data) {
 		if (player == null) {

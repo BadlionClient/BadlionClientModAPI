@@ -1,6 +1,6 @@
 package net.badlion.bukkitapi.listener;
 
-import net.badlion.bukkitapi.BukkitBadlionPlugin;
+import net.badlion.bukkitapi.AbstractBukkitBadlionPlugin;
 import net.badlion.bukkitapi.timers.TimerApi;
 import net.badlion.modapicommon.AbstractBadlionApi;
 import org.bukkit.Bukkit;
@@ -16,18 +16,19 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import java.nio.charset.StandardCharsets;
 
 public class PlayerListener implements Listener {
-	private final BukkitBadlionPlugin plugin;
 
-	public PlayerListener(BukkitBadlionPlugin plugin) {
+	private final AbstractBukkitBadlionPlugin plugin;
+
+	public PlayerListener(AbstractBukkitBadlionPlugin plugin) {
 		this.plugin = plugin;
 	}
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
-		final Player player = event.getPlayer();
+		Player player = event.getPlayer();
 
 		// Handle disallowed mods
-		final Object message = AbstractBadlionApi.GSON_NON_PRETTY.toJson(this.plugin.getBadlionApi().getBadlionConfig()).getBytes();
+		byte[] message = AbstractBadlionApi.GSON_NON_PRETTY.toJson(this.plugin.getBadlionApi().getBadlionConfig()).getBytes();
 		this.plugin.getMessageSender().sendPluginMessagePacket(player, "badlion:modapi", message);
 
 		// Handle timer api
