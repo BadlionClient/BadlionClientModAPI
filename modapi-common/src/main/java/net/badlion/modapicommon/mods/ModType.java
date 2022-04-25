@@ -5,7 +5,8 @@ public enum ModType {
 	HEIGHT_OVERLAY("heightOverlay"),
 	WAYPOINTS("waypoints"),
 	TNT_TIME("tntTime"),
-	NOTIFICATION("notification");
+	NOTIFICATION("notification"),
+	SURVIVAL("survival");
 
 	private final String type;
 

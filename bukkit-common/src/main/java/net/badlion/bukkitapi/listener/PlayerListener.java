@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -37,6 +38,7 @@ public class PlayerListener implements Listener {
 
 		this.plugin.getWaypointManager().onPlayerJoin(player);
 		this.plugin.getCosmeticManager().onPlayerJoin(player);
+		this.plugin.getSurvivalManager().sendData(player);
 
 		Bukkit.getScheduler().runTaskLater(this.plugin, () -> this.plugin.getWaypointManager().sendWaypointsToClient(player, player.getWorld()), 40);
 	}
@@ -60,5 +62,10 @@ public class PlayerListener implements Listener {
 	public void onRespawn(PlayerRespawnEvent event) {
 		this.plugin.getWaypointManager().sendWaypointsToClient(event.getPlayer(), event.getRespawnLocation().getWorld());
 		this.plugin.getMessageSender().sendPluginMessagePacket(event.getPlayer(), TimerApi.CHANNEL_NAME, "CHANGE_WORLD|{}".getBytes(StandardCharsets.UTF_8));
+	}
+
+	@EventHandler
+	public void onJoinWorld(PlayerChangedWorldEvent event) {
+		this.plugin.getSurvivalManager().sendData(event.getPlayer());
 	}
 }

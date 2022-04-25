@@ -2,6 +2,7 @@ package net.badlion.modapicommon;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import net.badlion.modapicommon.survival.AbstractSurvivalManager;
 import net.badlion.modapicommon.utility.AbstractCosmeticManager;
 import net.badlion.modapicommon.utility.AbstractWaypointManager;
 
@@ -16,6 +17,7 @@ public abstract class AbstractBadlionApi {
 
 	private AbstractWaypointManager waypointManager;
 	private AbstractCosmeticManager cosmeticManager;
+	private AbstractSurvivalManager survivalManager;
 
 	protected AbstractBadlionApi() {
 		AbstractBadlionApi.instance = this;
@@ -85,6 +87,24 @@ public abstract class AbstractBadlionApi {
 	 */
 	public AbstractCosmeticManager getCosmeticManager() {
 		return this.cosmeticManager;
+	}
+
+	/**
+	 * Sets the implementation for the {@link AbstractSurvivalManager} class.
+	 *
+	 * @param survivalManager The survival manager instance
+	 */
+	public void setSurvivalManager(AbstractSurvivalManager survivalManager) {
+		this.survivalManager = survivalManager;
+	}
+
+	/**
+	 * Returns the implementation for the {@link AbstractSurvivalManager} class.
+	 *
+	 * @return The survival manager instance
+	 */
+	public AbstractSurvivalManager getSurvivalManager() {
+		return this.survivalManager;
 	}
 
 	/**

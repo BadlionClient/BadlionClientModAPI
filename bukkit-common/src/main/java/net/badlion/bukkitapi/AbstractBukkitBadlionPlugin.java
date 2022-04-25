@@ -2,6 +2,7 @@ package net.badlion.bukkitapi;
 
 import net.badlion.bukkitapi.cosmetics.CosmeticManager;
 import net.badlion.bukkitapi.listener.PlayerListener;
+import net.badlion.bukkitapi.survival.AbstractBukkitSurvivalManager;
 import net.badlion.bukkitapi.timers.TimerApi;
 import net.badlion.bukkitapi.timers.TimerApiImpl;
 import net.badlion.bukkitapi.waypoints.WaypointManager;
@@ -17,6 +18,7 @@ public class AbstractBukkitBadlionPlugin extends JavaPlugin {
 	private final WaypointManager waypointManager;
 	private final CosmeticManager cosmeticManager;
 	private AbstractBukkitPluginMessageSender messageSender;
+	private AbstractBukkitSurvivalManager survivalManager;
 
 	public AbstractBukkitBadlionPlugin() {
 		this.badlionApi = new BukkitBadlionApi(this);
@@ -31,6 +33,11 @@ public class AbstractBukkitBadlionPlugin extends JavaPlugin {
 		this.messageSender = messageSender;
 	}
 
+	protected void setSurvivalManager(AbstractBukkitSurvivalManager survivalManager) {
+		this.survivalManager = survivalManager;
+		this.badlionApi.setSurvivalManager(survivalManager);
+	}
+
 	@Override
 	public void onEnable() {
 		if (!this.getDataFolder().exists()) {
@@ -43,6 +50,7 @@ public class AbstractBukkitBadlionPlugin extends JavaPlugin {
 			this.badlionApi.loadConfig(new File(this.getDataFolder(), "config.json"));
 
 			this.waypointManager.loadWaypoints();
+			this.survivalManager.loadConfig();
 
 			// Register channel
 			this.getServer().getMessenger().registerOutgoingPluginChannel(this, "badlion:mods");
@@ -94,5 +102,9 @@ public class AbstractBukkitBadlionPlugin extends JavaPlugin {
 
 	public CosmeticManager getCosmeticManager() {
 		return this.cosmeticManager;
+	}
+
+	public AbstractBukkitSurvivalManager getSurvivalManager() {
+		return this.survivalManager;
 	}
 }

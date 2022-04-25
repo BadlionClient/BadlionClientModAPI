@@ -3,3 +3,7 @@ main: net.badlion.bukkitapi.BukkitBadlionPlugin
 version: 2.0
 author: Badlion
 api-version: 1.17
+
+commands:
+  survivalapi:
+    permission: badlion.survival
