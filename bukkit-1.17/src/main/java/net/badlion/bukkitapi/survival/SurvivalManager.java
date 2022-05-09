@@ -1,6 +1,8 @@
 package net.badlion.bukkitapi.survival;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import net.badlion.bukkitapi.BukkitBadlionPlugin;
 import net.badlion.modapicommon.AbstractBadlionApi;
 import net.badlion.modapicommon.mods.ModType;
@@ -106,7 +108,11 @@ public class SurvivalManager extends AbstractBukkitSurvivalManager {
 	}
 
 	private JsonElement generateData() {
-		return AbstractBadlionApi.GSON_NON_PRETTY.toJsonTree(this.config);
+		JsonObject jsonObject = AbstractBadlionApi.GSON_NON_PRETTY.toJsonTree(this.config).getAsJsonObject();
+
+		jsonObject.add("type", new JsonPrimitive("config"));
+
+		return jsonObject;
 	}
 
 	private void scheduleUpdate() {

@@ -29,6 +29,11 @@ public enum SurvivalFeature {
 		"Show shulker inventory",
 		"..."
 	),
+	SHOW_ENDERCHEST_INVENTORY(
+		"ENDER_CHEST",
+		"Show enderchest inventory",
+		"..."
+	),
 	SEARCH_BAR(
 		"SPYGLASS",
 		"Inventory search bar",
