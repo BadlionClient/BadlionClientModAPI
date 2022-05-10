@@ -172,6 +172,7 @@ Below is an example which allows the use of a few commands:
 + Auto Text
 + AutoGG
 + AutoTip
++ AutoWho
 + Bedwars Beds
 + Bedwars Upgrade Display
 + Block Counter
@@ -278,6 +279,7 @@ Below is an example which allows the use of a few commands:
 + Pack Display
 + Pack Tweaks
     + customSky
+    + enableOreOverlays
 + Particles
 + Perspective
 + Ping
@@ -301,6 +303,7 @@ Below is an example which allows the use of a few commands:
 + Skyblock
 + Speedometer
 + Stopwatch
++ Survival
 + Tab
 + Tactical Markers
 + TcpNoDelay
