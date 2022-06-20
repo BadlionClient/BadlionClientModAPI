@@ -126,7 +126,7 @@ public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender
 			throw new RuntimeException("Failed to find EntityPlayer.playerConnection");
 		}
 
-		if (this.versionSuffix.contains("v1_18")) {
+		if (!this.versionSuffix.contains("v1_17")) {
 			final Class<?> packet1_18Class = this.getClass("net.minecraft.network.protocol.Packet");
 
 			this.sendPacketMethod = this.getMethod(playerConnectionClass, "a", packet1_18Class);
