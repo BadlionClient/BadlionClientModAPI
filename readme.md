@@ -156,10 +156,11 @@ Below is an example which allows the use of a few commands:
     + leftHanded
     + noSmallArms
     + noShake
-    + removeHitDelay
     + fixLiquidPlace
+    + removeHitDelay
 + AntiXray
-+ ArmorStatus
++ Armor Status
+    + hideDurabilityForUnbreakables
     + showMaxDurability
     + showPercentage
     + handPiece
@@ -168,6 +169,7 @@ Below is an example which allows the use of a few commands:
     + chestPiece
     + helmetPiece
     + offHandPiece
+    + vanillaBackground
 + Auto Friend
 + Auto Text
 + AutoGG
@@ -269,6 +271,7 @@ Below is an example which allows the use of a few commands:
 + Minimap
 + MLG Cobweb
 + Motion Blur
++ Mouse Strokes
 + Mumble Link
 + Music
 + Name History
