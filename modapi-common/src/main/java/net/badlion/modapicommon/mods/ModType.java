@@ -6,7 +6,8 @@ public enum ModType {
 	WAYPOINTS("waypoints"),
 	TNT_TIME("tntTime"),
 	NOTIFICATION("notification"),
-	SURVIVAL("survival");
+	SURVIVAL("survival"),
+	TEAM_VIEWER("teamViewer");
 
 	private final String type;
 

@@ -5,6 +5,7 @@ Below are some examples of how you could hook into our mods using this API.
 * [Waypoints](https://github.com/BadlionClient/BadlionClientModAPI/blob/master/examples.md#waypoints)
 * [TNT Time](https://github.com/BadlionClient/BadlionClientModAPI/blob/master/examples.md#tnt-time)
 * [Height Limit Overlay](https://github.com/BadlionClient/BadlionClientModAPI/blob/master/examples.md#height-limit-overlay)
+* [Team Viewer](https://github.com/BadlionClient/BadlionClientModAPI/blob/master/examples.md#team-viewer)
 * [Notifications](https://github.com/BadlionClient/BadlionClientModAPI/blob/master/examples.md#notifications)
   * [Click Event Types](https://github.com/BadlionClient/BadlionClientModAPI/blob/master/examples.md#click-event-types)
   * [Levels](https://github.com/BadlionClient/BadlionClientModAPI/blob/master/examples.md#levels)
@@ -140,6 +141,57 @@ public class Game {
             HeightOverlay.reset();
         }
     }
+}
+```
+
+## Team Viewer
+
+Using the `net.badlion.modapicommon.mods.TeamViewer` class you can send a list of team members and their locations to
+the player and support the team viewer icon to be shown.
+
+```java
+// Since we need to send the locations on a regular basis to update the locations it's best to put the logic in a task
+// We recommend running it faster than 3 seconds since the client removes the locations after 5 seconds of no updates
+public class TeamViewerTask extends BukkitRunnable {
+
+  @Override
+  public void run() {
+
+    // This is just an example, there may be other ways you keep track of teams
+    TeamManager teamManager = Plugin.getTeamManager();
+
+    // Loop over all teams to update the locations
+    for (Team team : teamManager.getTeams()) {
+
+      List<TeamMemberLocation> locations = new ArrayList<>();
+
+      // First we loop over all players in this team
+      // We do not need to worry about having the player receiving it being in the list too since the client ignored that location
+      for (Player player : team.getMembers()) {
+
+        Location location = player.getLocation();
+
+        // Add the location for this member into the list
+        locations.add(
+                new TeamMemberLocation(
+                        player.getUniqueId(),
+                        team.getColor(), // This color has to be the in Hex value, can be different for each player
+                        location.getX(),
+                        location.getY(),
+                        location.getZ()
+                )
+        );
+
+      }
+
+      // Loop over all the players again and send the list
+      for (Player player : team.getMembers()) {
+
+        TeamViewer.sendLocations(player.getUniqueId(), locations);
+
+      }
+    }
+  }
 }
 ```
 

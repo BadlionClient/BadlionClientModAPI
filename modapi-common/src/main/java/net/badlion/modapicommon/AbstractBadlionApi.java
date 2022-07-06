@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.badlion.modapicommon.survival.AbstractSurvivalManager;
 import net.badlion.modapicommon.utility.AbstractCosmeticManager;
+import net.badlion.modapicommon.utility.AbstractTeamViewerManager;
 import net.badlion.modapicommon.utility.AbstractWaypointManager;
 
 import java.io.File;
@@ -18,6 +19,7 @@ public abstract class AbstractBadlionApi {
 	private AbstractWaypointManager waypointManager;
 	private AbstractCosmeticManager cosmeticManager;
 	private AbstractSurvivalManager survivalManager;
+	private AbstractTeamViewerManager teamViewerManager;
 
 	protected AbstractBadlionApi() {
 		AbstractBadlionApi.instance = this;
@@ -105,6 +107,24 @@ public abstract class AbstractBadlionApi {
 	 */
 	public AbstractSurvivalManager getSurvivalManager() {
 		return this.survivalManager;
+	}
+
+	/**
+	 * Sets the implementation for the {@link AbstractTeamViewerManager} class.
+	 *
+	 * @param teamViewerManager The team viewer manager instance
+	 */
+	public void setTeamViewerManager(AbstractTeamViewerManager teamViewerManager) {
+		this.teamViewerManager = teamViewerManager;
+	}
+
+	/**
+	 * Returns the implementation for the {@link AbstractTeamViewerManager} class.
+	 *
+	 * @return The team viewer manager instance
+	 */
+	public AbstractTeamViewerManager getTeamViewerManager() {
+		return this.teamViewerManager;
 	}
 
 	/**

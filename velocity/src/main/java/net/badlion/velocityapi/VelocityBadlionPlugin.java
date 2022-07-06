@@ -9,6 +9,7 @@ import com.velocitypowered.api.proxy.ProxyServer;
 import net.badlion.velocityapi.cosmetics.UnsupportedCosmeticManager;
 import net.badlion.velocityapi.listener.PlayerListener;
 import net.badlion.velocityapi.survival.UnsupportedSurvivalManager;
+import net.badlion.velocityapi.teamviewer.UnsupportedTeamViewerManager;
 import net.badlion.velocityapi.waypoints.UnsupportedWaypointManager;
 import org.slf4j.Logger;
 
@@ -38,6 +39,7 @@ public class VelocityBadlionPlugin {
 		this.badlionApi.setWaypointManager(new UnsupportedWaypointManager());
 		this.badlionApi.setCosmeticManager(new UnsupportedCosmeticManager());
 		this.badlionApi.setSurvivalManager(new UnsupportedSurvivalManager());
+		this.badlionApi.setTeamViewerManager(new UnsupportedTeamViewerManager());
 	}
 
 	@Subscribe
