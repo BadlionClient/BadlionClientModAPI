@@ -3,7 +3,7 @@ package net.badlion.bungeeapi;
 import net.badlion.bungeeapi.cosmetics.UnsupportedCosmeticManager;
 import net.badlion.bungeeapi.listener.PlayerListener;
 import net.badlion.bungeeapi.survival.UnsupportedSurvivalManager;
-import net.badlion.bungeeapi.teamviewer.UnsupportedTeamViewerManager;
+import net.badlion.bungeeapi.teammarker.UnsupportedTeamMarkerManager;
 import net.badlion.bungeeapi.waypoints.UnsupportedWaypointManager;
 import net.md_5.bungee.api.plugin.Plugin;
 
@@ -22,7 +22,7 @@ public class BungeeBadlionPlugin extends Plugin {
 		this.badlionApi.setWaypointManager(new UnsupportedWaypointManager());
 		this.badlionApi.setCosmeticManager(new UnsupportedCosmeticManager());
 		this.badlionApi.setSurvivalManager(new UnsupportedSurvivalManager());
-		this.badlionApi.setTeamViewerManager(new UnsupportedTeamViewerManager());
+		this.badlionApi.setTeamMarkerManager(new UnsupportedTeamMarkerManager());
 	}
 
 	@Override

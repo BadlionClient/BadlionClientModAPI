@@ -3,7 +3,7 @@ package net.badlion.bukkitapi;
 import net.badlion.bukkitapi.cosmetics.CosmeticManager;
 import net.badlion.bukkitapi.listener.PlayerListener;
 import net.badlion.bukkitapi.survival.AbstractBukkitSurvivalManager;
-import net.badlion.bukkitapi.teamviewer.TeamViewerManager;
+import net.badlion.bukkitapi.teammarker.TeamMarkerManager;
 import net.badlion.bukkitapi.timers.TimerApi;
 import net.badlion.bukkitapi.timers.TimerApiImpl;
 import net.badlion.bukkitapi.waypoints.WaypointManager;
@@ -28,7 +28,7 @@ public class AbstractBukkitBadlionPlugin extends JavaPlugin {
 		this.badlionApi.setWaypointManager(this.waypointManager);
 		this.cosmeticManager = new CosmeticManager();
 		this.badlionApi.setCosmeticManager(this.cosmeticManager);
-		this.badlionApi.setTeamViewerManager(new TeamViewerManager(this));
+		this.badlionApi.setTeamMarkerManager(new TeamMarkerManager(this));
 	}
 
 	protected void setMessageSender(AbstractBukkitPluginMessageSender messageSender) {

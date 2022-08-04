@@ -7,7 +7,7 @@ public enum ModType {
 	TNT_TIME("tntTime"),
 	NOTIFICATION("notification"),
 	SURVIVAL("survival"),
-	TEAM_VIEWER("teamViewer");
+	TEAM_MARKER("teamMarker");
 
 	private final String type;
 

@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Class with API Hooks for our Team Viewer mod.
+ * Class with API Hooks for our Team Marker mod.
  */
-public class TeamViewer {
+public class TeamMarker {
 
 	/**
 	 * Update the team member locations. You always need to send all the locations that should be showing as on each call old points will be deleted
@@ -21,6 +21,6 @@ public class TeamViewer {
 	 * @param locations List of team member locations to show
 	 */
 	public static void sendLocations(UUID player, List<TeamMemberLocation> locations) {
-		AbstractBadlionApi.getInstance().getTeamViewerManager().sendLocations(player, locations);
+		AbstractBadlionApi.getInstance().getTeamMarkerManager().sendLocations(player, locations);
 	}
 }

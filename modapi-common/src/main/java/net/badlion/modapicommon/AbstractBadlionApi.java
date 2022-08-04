@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.badlion.modapicommon.survival.AbstractSurvivalManager;
 import net.badlion.modapicommon.utility.AbstractCosmeticManager;
-import net.badlion.modapicommon.utility.AbstractTeamViewerManager;
+import net.badlion.modapicommon.utility.AbstractTeamMarkerManager;
 import net.badlion.modapicommon.utility.AbstractWaypointManager;
 
 import java.io.File;
@@ -19,7 +19,7 @@ public abstract class AbstractBadlionApi {
 	private AbstractWaypointManager waypointManager;
 	private AbstractCosmeticManager cosmeticManager;
 	private AbstractSurvivalManager survivalManager;
-	private AbstractTeamViewerManager teamViewerManager;
+	private AbstractTeamMarkerManager teamMarkerManager;
 
 	protected AbstractBadlionApi() {
 		AbstractBadlionApi.instance = this;
@@ -110,21 +110,21 @@ public abstract class AbstractBadlionApi {
 	}
 
 	/**
-	 * Sets the implementation for the {@link AbstractTeamViewerManager} class.
+	 * Sets the implementation for the {@link AbstractTeamMarkerManager} class.
 	 *
-	 * @param teamViewerManager The team viewer manager instance
+	 * @param teamMarkerManager The team marker manager instance
 	 */
-	public void setTeamViewerManager(AbstractTeamViewerManager teamViewerManager) {
-		this.teamViewerManager = teamViewerManager;
+	public void setTeamMarkerManager(AbstractTeamMarkerManager teamMarkerManager) {
+		this.teamMarkerManager = teamMarkerManager;
 	}
 
 	/**
-	 * Returns the implementation for the {@link AbstractTeamViewerManager} class.
+	 * Returns the implementation for the {@link AbstractTeamMarkerManager} class.
 	 *
-	 * @return The team viewer manager instance
+	 * @return The team marker manager instance
 	 */
-	public AbstractTeamViewerManager getTeamViewerManager() {
-		return this.teamViewerManager;
+	public AbstractTeamMarkerManager getTeamMarkerManager() {
+		return this.teamMarkerManager;
 	}
 
 	/**

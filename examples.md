@@ -5,7 +5,7 @@ Below are some examples of how you could hook into our mods using this API.
 * [Waypoints](https://github.com/BadlionClient/BadlionClientModAPI/blob/master/examples.md#waypoints)
 * [TNT Time](https://github.com/BadlionClient/BadlionClientModAPI/blob/master/examples.md#tnt-time)
 * [Height Limit Overlay](https://github.com/BadlionClient/BadlionClientModAPI/blob/master/examples.md#height-limit-overlay)
-* [Team Viewer](https://github.com/BadlionClient/BadlionClientModAPI/blob/master/examples.md#team-viewer)
+* [Team Marker](https://github.com/BadlionClient/BadlionClientModAPI/blob/master/examples.md#team-marker)
 * [Notifications](https://github.com/BadlionClient/BadlionClientModAPI/blob/master/examples.md#notifications)
   * [Click Event Types](https://github.com/BadlionClient/BadlionClientModAPI/blob/master/examples.md#click-event-types)
   * [Levels](https://github.com/BadlionClient/BadlionClientModAPI/blob/master/examples.md#levels)
@@ -144,15 +144,15 @@ public class Game {
 }
 ```
 
-## Team Viewer
+## Team Marker
 
-Using the `net.badlion.modapicommon.mods.TeamViewer` class you can send a list of team members and their locations to
-the player and support the team viewer icon to be shown.
+Using the `net.badlion.modapicommon.mods.TeamMarker` class you can send a list of team members and their locations to
+the player and support the team marker icon to be shown.
 
 ```java
 // Since we need to send the locations on a regular basis to update the locations it's best to put the logic in a task
 // We recommend running it faster than 3 seconds since the client removes the locations after 5 seconds of no updates
-public class TeamViewerTask extends BukkitRunnable {
+public class TeamMarkerTask extends BukkitRunnable {
 
   @Override
   public void run() {
@@ -187,7 +187,7 @@ public class TeamViewerTask extends BukkitRunnable {
       // Loop over all the players again and send the list
       for (Player player : team.getMembers()) {
 
-        TeamViewer.sendLocations(player.getUniqueId(), locations);
+        TeamMarker.sendLocations(player.getUniqueId(), locations);
 
       }
     }
