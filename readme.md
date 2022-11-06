@@ -30,9 +30,9 @@ How to install the Badlion Client Mod API on your server.
 
 1. Clone this repository
 2. Compile the plugin(s) you want to use (you only need one per Minecraft network).
-2. Place the compiled plugins from the `target` directories into your `plugins` directory on your server.
-3. Turn on the BungeeCord or Bukkit server and a default config will be automatically made in `plugins/BadlionClientModAPI/config.json`
-4. Edit the config as you see fit and reboot the server after you have finished editing the config (see below for more information).
+3. Place the compiled plugins from the `target` directories into your `plugins` directory on your server.
+4. Turn on the BungeeCord or Bukkit server and a default config will be automatically made in `plugins/BadlionClientModAPI/config.json`
+5. Edit the config as you see fit and reboot the server after you have finished editing the config (see below for more information).
 
 ### Example Config
 

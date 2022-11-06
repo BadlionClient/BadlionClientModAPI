@@ -1,6 +1,5 @@
 package net.badlion.bukkitapi.cosmetics;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.badlion.modapicommon.AbstractBadlionApi;
 import net.badlion.modapicommon.utility.AbstractCosmeticManager;
@@ -52,21 +51,5 @@ public class CosmeticManager extends AbstractCosmeticManager implements Listener
 				AbstractBadlionApi.getInstance().getPluginMessageSender().sendData(player.getUniqueId(), "cosmetics", data);
 			}
 		}
-	}
-
-	private JsonObject getDisabledCosmeticsData(UUID uuid, boolean disabled, String... cosmeticTypes) {
-		final JsonObject data = new JsonObject();
-		final JsonArray array = new JsonArray();
-
-		for (String cosmeticType : cosmeticTypes) {
-			array.add(cosmeticType);
-		}
-
-		data.addProperty("type", "disable_cosmetics");
-		data.add("cosmeticTypes", array);
-		data.addProperty("disable", disabled);
-		data.addProperty("uuid", uuid.toString());
-
-		return data;
 	}
 }

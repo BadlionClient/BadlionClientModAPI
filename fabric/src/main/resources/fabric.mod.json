@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "badlion",
+  "version": "${version}",
+  "name": "Badlion",
+  "description": "Disable Badlion Client mods while Badlion Client users play on your server with this easy to use API.",
+  "authors": [],
+  "contact": {
+    "website": "https://client.badlion.net/",
+    "repo": "https://github.com/BadlionClient/BadlionClientModAPI"
+  },
+  "license": "MIT",
+  "icon": "assets/badlion/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "server": [
+      "net.badlion.fabricapi.FabricBadlionPlugin"
+    ]
+  },
+  "mixins": [
+    "badlion.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.10",
+    "fabric": "*",
+    "minecraft": "1.19.2"
+  }
+}
