@@ -121,7 +121,7 @@ public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender
 			throw new RuntimeException("Failed to find CraftPlayer.getHandle()");
 		}
 
-		this.playerConnectionField = this.getField(nmsPlayerClass, "b");
+		this.playerConnectionField = this.getField(nmsPlayerClass, "c");
 		if (this.playerConnectionField == null) {
 			throw new RuntimeException("Failed to find EntityPlayer.playerConnection");
 		}
