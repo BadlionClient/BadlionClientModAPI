@@ -121,13 +121,13 @@ public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender
 			throw new RuntimeException("Failed to find CraftPlayer.getHandle()");
 		}
 
-        if (this.versionSuffix.contains("v1_17") || this.versionSuffix.contains("v1_18") || this.versionSuffix.contains("v1_19")) {
-		    this.playerConnectionField = this.getField(nmsPlayerClass, "b");
+		if (this.versionSuffix.contains("v1_17") || this.versionSuffix.contains("v1_18") || this.versionSuffix.contains("v1_19")) {
+			this.playerConnectionField = this.getField(nmsPlayerClass, "b");
 		} else {
-		    this.playerConnectionField = this.getField(nmsPlayerClass, "c");
+			this.playerConnectionField = this.getField(nmsPlayerClass, "c");
 		}
 
-        if (this.playerConnectionField == null) {
+		if (this.playerConnectionField == null) {
 			throw new RuntimeException("Failed to find EntityPlayer.playerConnection");
 		}
 
