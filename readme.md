@@ -136,6 +136,7 @@ Below is an example which allows the use of a few commands:
 
 ### Mod Names and Fields that can be disabled
 
++ 3D Skins
 + Animations
     + itemHeld
     + itemSwitch
@@ -186,6 +187,7 @@ Below is an example which allows the use of a few commands:
     + timeStamp24h
     + timeStampBold
     + antiSpam
+    + ignoreClickableMessagesForSpawn
     + infiniteHistory
     + emphasizeUsername
     + boldEffect
@@ -194,6 +196,8 @@ Below is an example which allows the use of a few commands:
     + soundEffect
     + smoothChat
     + noCloseMyChat
+    + vanillaFont
+    + hypixelTabComplete
 + Chunk Borders
 + Clear Glass
 + Clock
@@ -242,6 +246,7 @@ Below is an example which allows the use of a few commands:
     + reversed
 + Fullbright
 + GUI
++ Height Overlay
 + Hit Color
 + Hitboxes
     + animalHitBoxesEnabled
@@ -310,6 +315,7 @@ Below is an example which allows the use of a few commands:
 + Tab
 + Tactical Markers
 + TcpNoDelay
++ Team Marker
 + TeamSpeak
 + Time Changer
 + Timers
@@ -319,6 +325,8 @@ Below is an example which allows the use of a few commands:
     + inventorySneak
 + ToggleSprint
     + flySpeed
++ TPS
+    + reversed
 + Uptime
 + Waypoints
 + Weather Changer
