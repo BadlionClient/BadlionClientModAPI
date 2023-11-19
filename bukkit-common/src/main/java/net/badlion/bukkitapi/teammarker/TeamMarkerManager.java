@@ -1,5 +1,6 @@
 package net.badlion.bukkitapi.teammarker;
 
+import com.google.gson.JsonObject;
 import net.badlion.bukkitapi.AbstractBukkitBadlionPlugin;
 import net.badlion.modapicommon.AbstractBadlionApi;
 import net.badlion.modapicommon.mods.ModType;
@@ -19,6 +20,9 @@ public class TeamMarkerManager extends AbstractTeamMarkerManager {
 
 	@Override
 	public void sendLocations(UUID player, List<TeamMemberLocation> locations) {
-		this.apiBukkit.getMessageSender().sendModData(player, ModType.TEAM_MARKER, AbstractBadlionApi.GSON_NON_PRETTY.toJsonTree(locations));
+		JsonObject payload = new JsonObject();
+		payload.add("locations", AbstractBadlionApi.GSON_NON_PRETTY.toJsonTree(locations));
+
+		this.apiBukkit.getMessageSender().sendModData(player, ModType.TEAM_MARKER, payload);
 	}
 }
