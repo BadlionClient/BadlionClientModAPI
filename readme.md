@@ -267,6 +267,7 @@ Below is an example which allows the use of a few commands:
 + Item Counter
 + Item Info
 + Item Physics
++ Item Size
 + Item Tracker
 + Just Enough Items
 + Keystrokes
@@ -309,6 +310,7 @@ Below is an example which allows the use of a few commands:
 + Shaders
 + Shinypots
 + Skyblock
++ Sounds Mod
 + Speedometer
 + Stopwatch
 + Survival
@@ -328,6 +330,7 @@ Below is an example which allows the use of a few commands:
 + TPS
     + reversed
 + Uptime
++ Voice Mod
 + Waypoints
 + Weather Changer
 + World Edit CUI
