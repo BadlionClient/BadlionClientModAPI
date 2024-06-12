@@ -7,7 +7,7 @@
     <groupId>net.badlion</groupId>
     <artifactId>badlionclientmodapi</artifactId>
     <packaging>pom</packaging>
-    <version>2.1.4</version>
+    <version>2.1.5</version>
 
     <name>Badlion Client Mod Api</name>
     <description>Badlion Client Mod Api for disabling mods or adding additional content to the client from the server</description>
