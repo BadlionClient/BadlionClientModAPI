@@ -1,6 +1,5 @@
 package net.badlion.bukkitapi;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.Constructor;
@@ -19,13 +18,16 @@ public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender
 	private final Method sendPacketMethod;
 
 	private String versionSuffix;
+	private String versionName;
 
 	private Constructor<?> packetPlayOutCustomPayloadConstructor;
 	private Constructor<?> packetPlayOutMinecraftKeyConstructor;
+	private Constructor<?> discardedPayloadConstructor;
 	private Class<?> minecraftKeyClass;
 	private Class<?> customPacketPayloadClass;
 	private boolean useMinecraftKey;
 	private boolean usePacketPayload;
+	private boolean useDiscardedPayload;
 
 	// Bukkit 1.8+ support
 	private Class<?> packetDataSerializerClass;
@@ -39,23 +41,29 @@ public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender
 		this.apiBukkit = apiBukkit;
 
 		// Get the v1_X_Y from the end of the package name, e.g. v_1_7_R4 or v_1_12_R1
-		String packageName = Bukkit.getServer().getClass().getPackage().getName();
+		String packageName = this.apiBukkit.getServer().getClass().getPackage().getName();
 		String[] parts = packageName.split("\\.");
 
 		if (parts.length > 0) {
 			String suffix = parts[parts.length - 1];
 			if (!suffix.startsWith("v")) {
-				throw new RuntimeException("Failed to find version for running Minecraft server, got suffix " + suffix);
+				// 1.20.5+ support
+				if ("craftbukkit".equals(suffix)) {
+					suffix = "";
+				} else {
+					throw new RuntimeException("Failed to find version for running Minecraft server, got suffix " + suffix);
+				}
 			}
 
 			this.versionSuffix = suffix;
+			this.versionName = this.apiBukkit.getServer().getVersion();
 
-			this.apiBukkit.getLogger().info("Found version " + this.versionSuffix);
+			this.apiBukkit.getLogger().info("Found version " + this.versionSuffix + " (" + this.versionName + ")");
 		}
 
 		// We need to use reflection because Bukkit by default handles plugin messages in a really silly way
 		// Reflection stuff
-		Class<?> craftPlayerClass = this.getClass("org.bukkit.craftbukkit." + this.versionSuffix + ".entity.CraftPlayer");
+		Class<?> craftPlayerClass = this.getClass(this.versionSuffix == null || this.versionSuffix.isEmpty() ? "org.bukkit.craftbukkit.entity.CraftPlayer" : "org.bukkit.craftbukkit." + this.versionSuffix + ".entity.CraftPlayer");
 		if (craftPlayerClass == null) {
 			throw new RuntimeException("Failed to find CraftPlayer class");
 		}
@@ -124,6 +132,16 @@ public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender
 						this.packetDataSerializerWriteBytesMethod = this.getMethod(this.packetDataSerializerClass, "c", byte[].class);
 						this.packetPlayOutMinecraftKeyConstructor = this.getConstructor(this.minecraftKeyClass, String.class);
 						this.usePacketPayload = true;
+
+						Class<?> discardedPayloadClass = this.getClass("net.minecraft.network.protocol.common.custom.DiscardedPayload");
+
+						if (discardedPayloadClass != null) {
+							this.discardedPayloadConstructor = this.getConstructor(discardedPayloadClass, this.minecraftKeyClass, byteBufClass);
+
+							if (this.discardedPayloadConstructor != null) {
+								this.useDiscardedPayload = true;
+							}
+						}
 					}
 
 					if (this.packetPlayOutCustomPayloadConstructor == null) {
@@ -141,35 +159,47 @@ public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender
 			throw new RuntimeException("Failed to find CraftPlayer.getHandle()");
 		}
 
+		Field playerConnectionField;
+
 		if (this.versionSuffix.contains("v1_17") || this.versionSuffix.contains("v1_18") || this.versionSuffix.contains("v1_19")) {
-			this.playerConnectionField = this.getField(nmsPlayerClass, "b");
+			playerConnectionField = this.getField(nmsPlayerClass, "b");
 		} else {
-			this.playerConnectionField = this.getField(nmsPlayerClass, "c");
+			playerConnectionField = this.getField(nmsPlayerClass, "c");
 		}
 
-		if (this.playerConnectionField == null) {
+		if (playerConnectionField == null) {
+			playerConnectionField = this.getField(nmsPlayerClass, "connection");
+		}
+
+		if (playerConnectionField != null) {
+			this.playerConnectionField = playerConnectionField;
+		} else {
 			throw new RuntimeException("Failed to find EntityPlayer.playerConnection");
 		}
 
 		if (!this.versionSuffix.contains("v1_17")) {
 			final Class<?> packet1_18Class = this.getClass("net.minecraft.network.protocol.Packet");
+			Method sendPacketMethod;
 
 			if (this.usePacketPayload) {
-				this.sendPacketMethod = this.getMethod(playerConnectionClass.getSuperclass(), "b", packet1_18Class);
-
-				if (this.sendPacketMethod == null) {
-					throw new RuntimeException("Failed to find PlayerConnection.b(Packet)");
-				}
+				sendPacketMethod = this.getMethod(playerConnectionClass.getSuperclass(), "b", packet1_18Class);
 			} else {
-				this.sendPacketMethod = this.getMethod(playerConnectionClass, "a", packet1_18Class);
+				sendPacketMethod = this.getMethod(playerConnectionClass, "a", packet1_18Class);
+			}
 
-				if (this.sendPacketMethod == null) {
-					throw new RuntimeException("Failed to find PlayerConnection.a(Packet)");
-				}
+			if (sendPacketMethod == null) {
+				sendPacketMethod = this.getMethod(playerConnectionClass.getSuperclass(), "send", packet1_18Class);
+			}
+
+			if (sendPacketMethod != null) {
+				this.sendPacketMethod = sendPacketMethod;
+			} else {
+				throw new RuntimeException("Failed to find PlayerConnection.send(Packet)");
 			}
 
 		} else {
 			this.sendPacketMethod = this.getMethod(playerConnectionClass, "sendPacket");
+
 			if (this.sendPacketMethod == null) {
 				throw new RuntimeException("Failed to find PlayerConnection.sendPacket()");
 			}
@@ -184,17 +214,28 @@ public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender
 			// Newer MC version, setup ByteBuf object
 			if (this.packetDataSerializerClass != null) {
 				if (this.usePacketPayload) {
-					Object payload = Proxy.newProxyInstance(this.getClass().getClassLoader(), new Class[]{this.customPacketPayloadClass}, (proxy, method, args) -> {
-						if (method.getReturnType().equals(BukkitPluginMessageSender.this.minecraftKeyClass)) {
-							return this.packetPlayOutMinecraftKeyConstructor.newInstance(channel);
-						} else if (args.length == 1 && this.packetDataSerializerClass.isAssignableFrom(args[0].getClass())) {
-							this.packetDataSerializerWriteBytesMethod.invoke(args[0], data);
+					Object payload;
+
+					if (this.useDiscardedPayload) {
+						// 1.20.5+
+						payload = this.discardedPayloadConstructor.newInstance(
+							this.packetPlayOutMinecraftKeyConstructor.newInstance(channel),
+							this.wrappedBufferMethod.invoke(null, data)
+						);
+					} else {
+						// 1.20.2 - 1.20.4
+						payload = Proxy.newProxyInstance(this.getClass().getClassLoader(), new Class[]{this.customPacketPayloadClass}, (proxy, method, args) -> {
+							if (method.getReturnType().equals(BukkitPluginMessageSender.this.minecraftKeyClass)) {
+								return this.packetPlayOutMinecraftKeyConstructor.newInstance(channel);
+							} else if (args.length == 1 && this.packetDataSerializerClass.isAssignableFrom(args[0].getClass())) {
+								this.packetDataSerializerWriteBytesMethod.invoke(args[0], data);
+								return null;
+							}
+
 							return null;
-						}
+						});
 
-						return null;
-					});
-
+					}
 					packet = this.packetPlayOutCustomPayloadConstructor.newInstance(payload);
 				} else {
 					Object byteBuf = this.wrappedBufferMethod.invoke(null, data);
