@@ -23,6 +23,7 @@ public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender
 	private Constructor<?> packetPlayOutCustomPayloadConstructor;
 	private Constructor<?> packetPlayOutMinecraftKeyConstructor;
 	private Constructor<?> discardedPayloadConstructor;
+	private Method resourceLocationParseMethod;
 	private Class<?> minecraftKeyClass;
 	private Class<?> customPacketPayloadClass;
 	private boolean useMinecraftKey;
@@ -48,6 +49,7 @@ public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender
 			String suffix = parts[parts.length - 1];
 			if (!suffix.startsWith("v")) {
 				// 1.20.5+ support
+				// TODO: In 1.20.5+, the private method `CraftPlayer.sendCustomPayload(ResourceLocation, byte[])` should do the trick and handle all future versions
 				if ("craftbukkit".equals(suffix)) {
 					suffix = "";
 				} else {
@@ -142,6 +144,11 @@ public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender
 								this.useDiscardedPayload = true;
 							}
 						}
+
+						// 1.21+
+						if (this.packetPlayOutMinecraftKeyConstructor == null) {
+							this.resourceLocationParseMethod = this.getMethod(this.minecraftKeyClass, "parse", String.class);
+						}
 					}
 
 					if (this.packetPlayOutCustomPayloadConstructor == null) {
@@ -217,11 +224,19 @@ public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender
 					Object payload;
 
 					if (this.useDiscardedPayload) {
-						// 1.20.5+
-						payload = this.discardedPayloadConstructor.newInstance(
-							this.packetPlayOutMinecraftKeyConstructor.newInstance(channel),
-							this.wrappedBufferMethod.invoke(null, data)
-						);
+						if (this.packetPlayOutMinecraftKeyConstructor == null) {
+							// 1.21+
+							payload = this.discardedPayloadConstructor.newInstance(
+								this.resourceLocationParseMethod.invoke(null, channel),
+								this.wrappedBufferMethod.invoke(null, data)
+							);
+						} else {
+							// 1.20.5+
+							payload = this.discardedPayloadConstructor.newInstance(
+								this.packetPlayOutMinecraftKeyConstructor.newInstance(channel),
+								this.wrappedBufferMethod.invoke(null, data)
+							);
+						}
 					} else {
 						// 1.20.2 - 1.20.4
 						payload = Proxy.newProxyInstance(this.getClass().getClassLoader(), new Class[]{this.customPacketPayloadClass}, (proxy, method, args) -> {
