@@ -158,6 +158,7 @@ Below is an example which allows the use of a few commands:
     + noSmallArms
     + noShake
     + fixLiquidPlace
+    + movableTitles
     + removeHitDelay
 + AntiXray
 + Armor Status
@@ -176,8 +177,7 @@ Below is an example which allows the use of a few commands:
 + AutoGG
 + AutoTip
 + AutoWho
-+ Bedwars Beds
-+ Bedwars Upgrade Display
++ Bed Colors
 + Block Counter
 + Block Info
 + Block Overlay
@@ -241,6 +241,7 @@ Below is an example which allows the use of a few commands:
 + Damage Tint
 + Direction
 + Enchant Glint
++ Fog Customizer
 + FOV Changer
 + FPS
     + reversed
@@ -329,6 +330,7 @@ Below is an example which allows the use of a few commands:
     + flySpeed
 + TPS
     + reversed
++ Tweaks
 + Uptime
 + Voice Mod
 + Waypoints
