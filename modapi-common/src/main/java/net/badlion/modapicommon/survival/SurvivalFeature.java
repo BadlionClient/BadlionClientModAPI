@@ -43,6 +43,41 @@ public enum SurvivalFeature {
 		"ELDER_GUARDIAN_SPAWN_EGG",
 		"Remove elder guardian effect",
 		"..."
+	),
+	ANTI_STRIP_LOG(
+		"OAK_LOG",
+		"Anti strip log",
+		"..."
+	),
+	DEATH_COUNTER(
+		"REDSTONE",
+		"Death counter",
+		"..."
+	),
+	DEATH_FINDER(
+		"COMPASS",
+		"Death finder",
+		"..."
+	),
+	TOOL_INFO(
+		"IRON_PICKAXE",
+		"Tool stats",
+		"..."
+	),
+	INVENTORY_MOVE(
+		"CRAFTING_TABLE",
+		"Inventory move",
+		"..."
+	),
+	BREEDING_TIMER(
+		"CARROT",
+		"Breeding Timer",
+		"..."
+	),
+	INVENTORY_VIEWER(
+		"CHEST",
+		"Inventory Viewer",
+		"..."
 	);
 
 	private final String material;
