@@ -175,9 +175,11 @@ Below is an example which allows the use of a few commands:
 + Auto Friend
 + Auto Text
 + AutoGG
++ AutoGL
 + AutoTip
 + AutoWho
 + Bed Colors
++ Better Chunks
 + Block Counter
 + Block Info
 + Block Overlay
@@ -241,7 +243,9 @@ Below is an example which allows the use of a few commands:
 + Damage Tint
 + Direction
 + Enchant Glint
++ F3 Menu
 + Fog Customizer
+    + overrideDensity
 + FOV Changer
 + FPS
     + reversed
@@ -308,6 +312,7 @@ Below is an example which allows the use of a few commands:
     + removeNumberOffset
 + Server Address
     + showIcon
++ Servers
 + Shaders
 + Shinypots
 + Skyblock
