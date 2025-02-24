@@ -13,30 +13,29 @@ public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender
 
 	private final AbstractBukkitBadlionPlugin apiBukkit;
 
-	private final Method getHandleMethod;
-	private final Field playerConnectionField;
-	private final Method sendPacketMethod;
-
 	private String versionSuffix;
-	private String versionName;
 
-	private Constructor<?> packetPlayOutCustomPayloadConstructor;
-	private Constructor<?> packetPlayOutMinecraftKeyConstructor;
-	private Constructor<?> discardedPayloadConstructor;
-	private Method resourceLocationParseMethod;
+	private Class<?> packetDataSerializerClass;
 	private Class<?> minecraftKeyClass;
 	private Class<?> customPacketPayloadClass;
+
+	private Constructor<?> packetPlayOutCustomPayloadConstructor;
+	private Constructor<?> packetDataSerializerConstructor;
+	private Constructor<?> packetPlayOutMinecraftKeyConstructor;
+	private Constructor<?> discardedPayloadConstructor;
+
+	private Method sendCustomPayloadMethod;
+	private Method wrappedBufferMethod;
+	private Method packetDataSerializerWriteBytesMethod;
+	private Method resourceLocationParseMethod;
+	private Method getHandleMethod;
+	private Method sendPacketMethod;
+
+	private Field playerConnectionField;
+
 	private boolean useMinecraftKey;
 	private boolean usePacketPayload;
 	private boolean useDiscardedPayload;
-
-	// Bukkit 1.8+ support
-	private Class<?> packetDataSerializerClass;
-	private Method packetDataSerializerWriteBytesMethod;
-	private Constructor<?> packetDataSerializerConstructor;
-
-	private Method wrappedBufferMethod;
-
 
 	public BukkitPluginMessageSender(AbstractBukkitBadlionPlugin apiBukkit) {
 		this.apiBukkit = apiBukkit;
@@ -49,7 +48,6 @@ public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender
 			String suffix = parts[parts.length - 1];
 			if (!suffix.startsWith("v")) {
 				// 1.20.5+ support
-				// TODO: In 1.20.5+, the private method `CraftPlayer.sendCustomPayload(ResourceLocation, byte[])` should do the trick and handle all future versions
 				if ("craftbukkit".equals(suffix)) {
 					suffix = "";
 				} else {
@@ -58,9 +56,10 @@ public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender
 			}
 
 			this.versionSuffix = suffix;
-			this.versionName = this.apiBukkit.getServer().getVersion();
 
-			this.apiBukkit.getLogger().info("Found version " + this.versionSuffix + " (" + this.versionName + ")");
+			String versionName = this.apiBukkit.getServer().getVersion();
+
+			this.apiBukkit.getLogger().info("Found version " + this.versionSuffix + " (" + versionName + ")");
 		}
 
 		// We need to use reflection because Bukkit by default handles plugin messages in a really silly way
@@ -68,6 +67,26 @@ public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender
 		Class<?> craftPlayerClass = this.getClass(this.versionSuffix == null || this.versionSuffix.isEmpty() ? "org.bukkit.craftbukkit.entity.CraftPlayer" : "org.bukkit.craftbukkit." + this.versionSuffix + ".entity.CraftPlayer");
 		if (craftPlayerClass == null) {
 			throw new RuntimeException("Failed to find CraftPlayer class");
+		}
+
+		// Paper method added in 1.20.2+, hopefully should never change
+		this.minecraftKeyClass = this.getClass("net.minecraft.resources.MinecraftKey");
+		if (this.minecraftKeyClass != null) {
+			this.sendCustomPayloadMethod = this.getMethod(craftPlayerClass, "sendCustomPayload", this.minecraftKeyClass, byte[].class);
+
+			if (this.sendCustomPayloadMethod != null) {
+				this.packetPlayOutMinecraftKeyConstructor = this.getConstructor(this.minecraftKeyClass, String.class);
+
+				if (this.packetPlayOutMinecraftKeyConstructor == null) {
+					this.resourceLocationParseMethod = this.getMethod(this.minecraftKeyClass, "parse", String.class);
+
+					if (this.resourceLocationParseMethod == null) {
+						this.resourceLocationParseMethod = this.getMethod(this.minecraftKeyClass, "a", String.class);
+					}
+				}
+
+				return;
+			}
 		}
 
 		Class<?> nmsPlayerClass = this.getClass("net.minecraft.server.level.EntityPlayer");
@@ -121,8 +140,6 @@ public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender
 			// If we made it this far in theory we are on at least 1.8
 			this.packetPlayOutCustomPayloadConstructor = this.getConstructor(packetPlayOutCustomPayloadClass, String.class, this.packetDataSerializerClass);
 			if (this.packetPlayOutCustomPayloadConstructor == null) {
-				this.minecraftKeyClass = this.getClass("net.minecraft.resources.MinecraftKey");
-
 				// Fix for Paper in newer versions
 				this.packetPlayOutCustomPayloadConstructor = this.getConstructor(packetPlayOutCustomPayloadClass, this.minecraftKeyClass, this.packetDataSerializerClass);
 
@@ -217,6 +234,19 @@ public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender
 	public void sendPluginMessagePacket(Player player, String channel, Object data) {
 		try {
 			Object packet;
+
+			if (this.sendCustomPayloadMethod != null) {
+				Object key;
+
+				if (this.packetPlayOutMinecraftKeyConstructor == null) {
+					key = this.resourceLocationParseMethod.invoke(null, channel);
+				} else {
+					key = this.packetPlayOutMinecraftKeyConstructor.newInstance(channel);
+				}
+
+				this.sendCustomPayloadMethod.invoke(player, key, data);
+				return;
+			}
 
 			// Newer MC version, setup ByteBuf object
 			if (this.packetDataSerializerClass != null) {
