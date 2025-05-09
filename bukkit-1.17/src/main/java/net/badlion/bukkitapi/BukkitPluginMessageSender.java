@@ -36,6 +36,7 @@ public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender
 	private boolean useMinecraftKey;
 	private boolean usePacketPayload;
 	private boolean useDiscardedPayload;
+	private boolean useDiscardedPayloadByteArray;
 
 	public BukkitPluginMessageSender(AbstractBukkitBadlionPlugin apiBukkit) {
 		this.apiBukkit = apiBukkit;
@@ -159,6 +160,12 @@ public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender
 
 							if (this.discardedPayloadConstructor != null) {
 								this.useDiscardedPayload = true;
+							} else {
+								this.discardedPayloadConstructor = this.getConstructor(discardedPayloadClass, this.minecraftKeyClass, byte[].class);
+
+								if (this.discardedPayloadConstructor != null) {
+									this.useDiscardedPayloadByteArray = true;
+								}
 							}
 						}
 
@@ -267,6 +274,12 @@ public class BukkitPluginMessageSender extends AbstractBukkitPluginMessageSender
 								this.wrappedBufferMethod.invoke(null, data)
 							);
 						}
+					} else if (this.useDiscardedPayloadByteArray) {
+						// 1.21+
+						payload = this.discardedPayloadConstructor.newInstance(
+							this.resourceLocationParseMethod.invoke(null, channel),
+							data
+						);
 					} else {
 						// 1.20.2 - 1.20.4
 						payload = Proxy.newProxyInstance(this.getClass().getClassLoader(), new Class[]{this.customPacketPayloadClass}, (proxy, method, args) -> {
