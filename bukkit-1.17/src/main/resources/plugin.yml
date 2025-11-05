@@ -1,6 +1,6 @@
 name: BadlionClientModAPI
 main: net.badlion.bukkitapi.BukkitBadlionPlugin
-version: 2.1.8
+version: 2.1.9
 author: Badlion
 api-version: 1.17
 
