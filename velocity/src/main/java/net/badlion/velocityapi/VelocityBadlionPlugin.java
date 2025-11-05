@@ -18,7 +18,7 @@ import java.io.IOException;
 @Plugin(
 	id = "badlion-modapi",
 	name = "Badlion Client Mod Api",
-	version = "2.0",
+	version = "2.1.8",
 	authors = {"Badlion"}
 )
 public class VelocityBadlionPlugin {
